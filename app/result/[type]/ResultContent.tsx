@@ -9,6 +9,14 @@ import DimensionChart from "@/components/DimensionChart";
 import ShareButtons from "@/components/ShareButtons";
 import PersonalityCard from "@/components/PersonalityCard";
 
+const emojiMap: Record<string, string> = {
+  sofa: "🛋️", yolo: "🔥", gucci: "👗", gps: "🧭", "404": "🌲",
+  bling: "💎", npc: "🎮", drama: "🎭", ice: "🧊", wifi: "📶",
+  sensei: "🎓", vip: "👑", penguin: "🐧", pro: "⭐", couple: "💕",
+  collector: "📍", park: "🏂", photo: "📸", drunk: "🍷", early: "🌅",
+  rental: "🏷️", safety: "⛑️", groupie: "👥", zen: "🧘", flex: "✈️",
+};
+
 export default function ResultContent() {
   const params = useParams();
   const searchParams = useSearchParams();
@@ -30,6 +38,8 @@ export default function ResultContent() {
     .filter((p) => p.slug !== typeSlug)
     .slice(0, 3);
 
+  const emoji = emojiMap[typeSlug] ?? "⛷️";
+
   return (
     <main className="flex-1 max-w-3xl mx-auto px-4 py-8 md:py-16">
       <div
@@ -41,6 +51,7 @@ export default function ResultContent() {
         </p>
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex flex-col items-center md:items-start">
+            <div className="text-5xl mb-2">{emoji}</div>
             <h1 className="text-3xl font-bold mb-1">{personality.name}</h1>
             <p className="text-lg font-mono text-[var(--color-text-secondary)]">
               {personality.code}
