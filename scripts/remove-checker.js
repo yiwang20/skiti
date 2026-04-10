@@ -17,7 +17,7 @@ const { PNG } = require("pngjs");
 const DIR = path.join(__dirname, "..", "public", "images", "personalities");
 const BACKUP_DIR = path.join(__dirname, "..", "public", "images", "personalities-raw");
 
-const COLOR_TOLERANCE = 12; // max component difference to consider "same color"
+const COLOR_TOLERANCE = 18; // max component difference to consider "same color"
 
 function colorDist(a, b) {
   return Math.max(Math.abs(a[0] - b[0]), Math.abs(a[1] - b[1]), Math.abs(a[2] - b[2]));
@@ -60,8 +60,10 @@ function detectBackgroundColors(data, w, h) {
   }
 
   clusters.sort((a, b) => b.count - a.count);
-  // Round the center colors for clean output
-  const top = clusters.slice(0, 2).map((c) => [
+  // Take top 4 clusters to handle images with >2 background colors (e.g.
+  // a checker pattern that includes anti-aliased intermediate shades, or a
+  // background that has separate sky/snow colors).
+  const top = clusters.slice(0, 4).map((c) => [
     Math.round(c.center[0]),
     Math.round(c.center[1]),
     Math.round(c.center[2]),
@@ -80,12 +82,47 @@ function processImage(filename) {
   // Detect background colors
   const bgColors = detectBackgroundColors(data, w, h);
   const bgTotal = bgColors.reduce((s, c) => s + c[3], 0);
-  // Only accept a color as background if it represents > 5% of edge samples
-  const activeBg = bgColors.filter((c) => c[3] / bgTotal > 0.05);
+  // Accept any cluster that represents > 3% of edge samples
+  const activeBg = bgColors.filter((c) => c[3] / bgTotal > 0.03);
+
+  // Compute gray-brightness range spanned by the detected colors. If all the
+  // detected bg colors are gray (R≈G≈B), we'll also accept any gray pixel
+  // with brightness between min and max — this handles checker patterns that
+  // include anti-aliased intermediate shades (e.g. drama.png had 51, 138, 223
+  // all as background but detection only found 51 and 223).
+  const bgAllGray = activeBg.every(([r, g, b]) => {
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    return max - min <= 8;
+  });
+  let grayMin = Infinity, grayMax = -Infinity;
+  if (bgAllGray) {
+    for (const [r, g, b] of activeBg) {
+      const avg = (r + g + b) / 3;
+      if (avg < grayMin) grayMin = avg;
+      if (avg > grayMax) grayMax = avg;
+    }
+    // Padding so edge cases at the detected cluster centers still match.
+    // Also ensure the range extends to near-white (255) since checker patterns
+    // with a "light" color often have anti-aliased pixels close to 255.
+    grayMin -= 10;
+    grayMax += 15;
+    if (grayMax > 200) grayMax = 255;
+  }
 
   const isBackgroundPixel = (r, g, b) => {
+    // Direct cluster-center match (tight tolerance)
     for (const [br, bg, bb] of activeBg) {
       if (colorDist([r, g, b], [br, bg, bb]) <= COLOR_TOLERANCE) return true;
+    }
+    // Gray-range match: any gray pixel between the detected grays
+    if (bgAllGray) {
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      if (max - min <= 10) {
+        const avg = (r + g + b) / 3;
+        if (avg >= grayMin && avg <= grayMax) return true;
+      }
     }
     return false;
   };
