@@ -22,14 +22,11 @@ export default function PersonalityCard({ personality, href }: Props) {
           loading="lazy"
         />
       </div>
-      <div className="text-xs text-[var(--color-text-secondary)] mb-1">
-        你的人格类型是：
-      </div>
-      <div className="text-xs font-mono text-[var(--color-text-secondary)] mb-2">
+      <div className="text-base font-mono font-semibold text-[var(--color-primary)] tracking-wider mb-1">
         {personality.code}
       </div>
-      <h3 className="text-xl font-bold mb-1">{personality.name}</h3>
-      <p className="text-sm text-[var(--color-text-secondary)]">
+      <h3 className="text-lg font-bold mb-1">{personality.name}</h3>
+      <p className="text-xs text-[var(--color-text-secondary)]">
         {personality.slogan}
       </p>
     </Link>

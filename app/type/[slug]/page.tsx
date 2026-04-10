@@ -4,6 +4,7 @@ import { personalities } from "@/data/personalities";
 import { dimensions } from "@/data/dimensions";
 import DimensionChart from "@/components/DimensionChart";
 import PersonalityCard from "@/components/PersonalityCard";
+import { rescaleForDisplay } from "@/lib/visual-scale";
 
 export function generateStaticParams() {
   return personalities.map((p) => ({ slug: p.slug }));
@@ -41,10 +42,10 @@ export default function TypeDetailPage({
             />
           </div>
           <div className="flex-1">
-            <p className="text-xs font-mono text-[var(--color-text-secondary)] mb-1">
+            <p className="text-2xl font-mono font-semibold text-[var(--color-primary)] tracking-wider mb-1">
               {personality.code}
             </p>
-            <h1 className="text-3xl font-bold mb-2">{personality.name}</h1>
+            <h1 className="text-2xl font-bold mb-3">{personality.name}</h1>
             <p className="text-[var(--color-primary)] font-medium mb-4">
               {personality.slogan}
             </p>
@@ -64,7 +65,7 @@ export default function TypeDetailPage({
             <DimensionChart
               key={dim.id}
               dimension={dim}
-              score={personality.profile[i]}
+              score={rescaleForDisplay(i, personality.profile[i])}
             />
           ))}
         </div>

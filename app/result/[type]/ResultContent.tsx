@@ -5,6 +5,7 @@ import Link from "next/link";
 import { personalities } from "@/data/personalities";
 import { dimensions } from "@/data/dimensions";
 import { decodeScores } from "@/lib/encoding";
+import { rescaleForDisplay } from "@/lib/visual-scale";
 import DimensionChart from "@/components/DimensionChart";
 import ShareButtons from "@/components/ShareButtons";
 import PersonalityCard from "@/components/PersonalityCard";
@@ -48,10 +49,10 @@ export default function ResultContent() {
                 className="w-full h-full object-contain"
               />
             </div>
-            <h1 className="text-3xl font-bold mb-1">{personality.name}</h1>
-            <p className="text-lg font-mono text-[var(--color-text-secondary)]">
+            <p className="text-2xl font-mono font-semibold text-[var(--color-primary)] tracking-wider mb-1">
               {personality.code}
             </p>
+            <h1 className="text-2xl font-bold">{personality.name}</h1>
           </div>
           <div className="flex-1">
             <p className="text-sm font-medium text-[var(--color-primary)] mb-2">
@@ -81,7 +82,11 @@ export default function ResultContent() {
           </h2>
           <div className="grid gap-3">
             {dimensions.map((dim, i) => (
-              <DimensionChart key={dim.id} dimension={dim} score={scores[i]} />
+              <DimensionChart
+                key={dim.id}
+                dimension={dim}
+                score={rescaleForDisplay(i, scores[i])}
+              />
             ))}
           </div>
         </section>

@@ -48,7 +48,7 @@ const intent: Record<string, [Level, Level, Level, Level, Level, Level]> = {
   yolo:      ["vhigh", "high",  "mid",   "low",   "vlow",  "low"],   // reckless
   gucci:     ["low",   "low",   "high",  "vhigh", "high",  "high"],  // fashion queen
   gps:       ["mid",   "mid",   "vhigh", "low",   "low",   "mid"],   // leader
-  "404":     ["high",  "high",  "low",   "low",   "low",   "mid"],   // lone backcountry
+  "404":     ["vhigh", "vhigh", "low",   "low",   "low",   "mid"],   // lone backcountry
   bling:     ["low",   "low",   "mid",   "high",  "mid",   "vhigh"], // gear nerd
   npc:       ["low",   "low",   "low",   "low",   "mid",   "low"],   // generic
   drama:     ["mid",   "low",   "vhigh", "mid",   "mid",   "low"],   // social drama
@@ -60,6 +60,7 @@ const intent: Record<string, [Level, Level, Level, Level, Level, Level]> = {
   pro:       ["vhigh", "vhigh", "low",   "low",   "vlow",  "high"],  // top skill
   couple:    ["low",   "low",   "high",  "high",  "mid",   "mid"],   // couple vibe
   stamp:     ["mid",   "high",  "mid",   "low",   "low",   "low"],   // collector
+  tree:      ["high",  "vhigh", "low",   "low",   "vlow",  "mid"],   // tree run specialist
   park:      ["high",  "high",  "high",  "mid",   "vlow",  "high"],  // park rat
   photo:     ["low",   "low",   "high",  "high",  "high",  "high"],  // photographer
   drunk:     ["mid",   "low",   "high",  "mid",   "vhigh", "low"],   // drunk
