@@ -90,11 +90,15 @@ export const questions: Question[] = [
   },
   {
     id: 11,
-    text: "你买滑雪装备的决策依据是？",
-    options: ["性价比，够用就行", "看测评研究一番", "好看就行，性能什么的再说"],
+    text: "缆车停在半空中纹丝不动 5 分钟了，你？",
+    options: [
+      "开始跟对面缆车的陌生人隔空喊话",
+      `淡定掏出手机拍 vlog"家人们这是山顶限定"`,
+      "默默开始在心里写遗书",
+    ],
     effects: [
-      { dim: "s6", scores: [1, 2, 3] },
-      { dim: "s4", scores: [1, 2, 3] },
+      { dim: "s3", scores: [3, 2, 1] },
+      { dim: "s4", scores: [1, 3, 1] },
     ],
   },
   {
@@ -135,11 +139,15 @@ export const questions: Question[] = [
   },
   {
     id: 16,
-    text: "你对请教练的态度是？",
-    options: ["必须请，科学进步", "看YouTube自学就够了", "教练能教我在缆车上自拍的角度吗"],
+    text: `雪场广播响起"请问哪位滑友丢了一只左脚雪鞋"，你？`,
+    options: [
+      "事不关己，继续滑",
+      "默默低头看了看自己的脚",
+      "冲过去说是我的（虽然并不是）",
+    ],
     effects: [
-      { dim: "s1", scores: [1, 2, 3] },
-      { dim: "s4", scores: [1, 1, 3] },
+      { dim: "s3", scores: [1, 2, 3] },
+      { dim: "s5", scores: [1, 1, 3] },
     ],
   },
   {
@@ -172,7 +180,11 @@ export const questions: Question[] = [
   {
     id: 20,
     text: "你第一次上高级道是因为？",
-    options: ["循序渐进练到了那个水平", "朋友拉我去的，我也不知道怎么下来的", "走错了"],
+    options: [
+      "循序渐进练到了那个水平",
+      `朋友在旁边说"X总，你没问题的"，然后我就上去了`,
+      "走错了",
+    ],
     effects: [
       { dim: "s1", scores: [1, 3, 2] },
       { dim: "s2", scores: [3, 2, 1] },
@@ -198,9 +210,16 @@ export const questions: Question[] = [
   },
   {
     id: 23,
-    text: "你的滑雪技术主要是怎么学的？",
-    options: ["请教练系统学习", "看视频自学加实战", "纯靠摔，摔会了算"],
-    effects: [{ dim: "s1", scores: [1, 2, 3] }],
+    text: "你在雪道中间停下来系鞋带，后面撞过来一个人，你？",
+    options: [
+      "赶紧道歉",
+      "说是他没看路",
+      "就地痛苦呻吟打算讹一笔",
+    ],
+    effects: [
+      { dim: "s1", scores: [1, 2, 3] },
+      { dim: "s5", scores: [1, 1, 3] },
+    ],
   },
   {
     id: 24,
@@ -228,11 +247,15 @@ export const questions: Question[] = [
   },
   {
     id: 27,
-    text: "你怎么形容自己的滑雪风格？",
-    options: ["稳如老狗", "偶尔浪一下", "每次都像在拍极限运动纪录片"],
+    text: "雪场看到一个穿汉服滑雪的姐姐，你？",
+    options: [
+      "文化输出，默默点个赞",
+      "掏手机拍照发小红书",
+      "明天我穿西游记 cos 来",
+    ],
     effects: [
-      { dim: "s1", scores: [1, 2, 3] },
-      { dim: "s2", scores: [1, 2, 3] },
+      { dim: "s4", scores: [1, 2, 3] },
+      { dim: "s3", scores: [1, 2, 3] },
     ],
   },
   {
@@ -255,10 +278,14 @@ export const questions: Question[] = [
   },
   {
     id: 30,
-    text: "赛季结束了，你的第一反应是？",
-    options: ["开始体能训练备战下个雪季", "把滑雪视频剪个合集发出来", "终于可以把钱花在别的地方了"],
+    text: "缆车上你旁边的人在吃辣条，味道特别大，你？",
+    options: [
+      "默默往边上挪",
+      "闻着还挺香",
+      "问他有没有多的分我一根",
+    ],
     effects: [
-      { dim: "s1", scores: [3, 2, 1] },
+      { dim: "s3", scores: [1, 2, 3] },
       { dim: "s5", scores: [1, 2, 3] },
     ],
   },

@@ -16,7 +16,7 @@ export const personalities: Personality[] = [
     name: "沙发客",
     slogan: "我来雪场是为了那碗火锅",
     description: "你的滑雪日常：滑两趟→休息室点杯热巧→刷一会儿手机→再滑一趟→午饭时间到了。朋友圈里你的滑雪照片背景永远是餐厅。别人问你今天滑了几趟，你掰着手指头数得出来。但你活得最明白——雪场的意义不在于刷了多少道，而在于那碗热气腾腾的火锅。你的快乐，别人不懂。",
-    profile: [43, 38, 47, 50, 65, 38],
+    profile: [41, 36, 48, 50, 63, 33],
     image: "/images/personalities/sofa.png",
   },
   {
@@ -25,7 +25,7 @@ export const personalities: Personality[] = [
     name: "莽王",
     slogan: "这条道没死过人吧？那我试试",
     description: `你滑雪的方式和你做人一样——先冲再说。黑道？冲。树林？冲。没去过的野雪？更要冲。你的技术可能不是最好的，但你的勇气一定是最猛的。你的护具永远在家里吃灰，你的骨科医生已经记住了你的名字。摔倒了？拍拍雪站起来，这不算什么。在你的字典里，没有"绕路"这个词。`,
-    profile: [68, 56, 47, 36, 27, 38],
+    profile: [68, 57, 48, 36, 27, 33],
     image: "/images/personalities/yolo.png",
   },
   {
@@ -34,7 +34,7 @@ export const personalities: Personality[] = [
     name: "雪场名媛",
     slogan: "雪服比雪技重要一万倍",
     description: "你出现在雪场的那一刻，所有人都会看过来——不是因为你的滑行，是因为你的穿搭。你的雪服配色是精心搭配的，雪镜要配今天的造型，连手套都是当季新款。滑雪对你来说只是拍照的背景板。你可能在初级道上优雅地划过，但那个姿态，那个气场，足以让所有高级道选手自惭形秽。",
-    profile: [43, 38, 59, 71, 54, 63],
+    profile: [41, 36, 56, 71, 53, 67],
     image: "/images/personalities/gucci.png",
   },
   {
@@ -43,7 +43,7 @@ export const personalities: Personality[] = [
     name: "领航员",
     slogan: "跟我走，这条道我闭眼都能滑",
     description: "你是朋友圈里的人形雪场地图。哪条道几点钟太阳晒到、哪个弯有冰、哪个缆车最快，你门清。每次组队滑雪你都自动变成领队，新人跟着你永远不会迷路。你的技术稳健扎实，但你最享受的不是自己刷道，而是看到你带的新手从摔跤到能独立下中级道的那个瞬间。",
-    profile: [50, 50, 71, 36, 38, 50],
+    profile: [50, 50, 68, 36, 37, 50],
     image: "/images/personalities/gps.png",
   },
   {
@@ -52,7 +52,7 @@ export const personalities: Personality[] = [
     name: "失联者",
     slogan: "别找我，我在树林里",
     description: "你的手机永远没信号，因为你永远在别人找不到的地方。树林、野雪、未开放区域——越是没人去的地方你越兴奋。朋友约你滑雪，到了雪场你就消失了，下午四点在停车场才能重新找到你。你不需要社交，不需要拍照，只需要一片没被破坏过的粉雪和绝对的安静。",
-    profile: [57, 56, 41, 36, 38, 50],
+    profile: [59, 57, 40, 36, 37, 50],
     image: "/images/personalities/404.png",
   },
   {
@@ -61,7 +61,7 @@ export const personalities: Personality[] = [
     name: "装备党",
     slogan: "板还没开封，但先发个开箱视频",
     description: "你的装备室比很多雪具店都豪华。最新款的板子、限量版的固定器、联名的雪镜——你全有。唯一的问题是，你的技术可能还配不上这些装备。但没关系，在雪具室里你就是最靓的仔。别人看你的板子都会倒吸一口凉气，直到他们看到你在初级道上的表现。",
-    profile: [43, 38, 47, 57, 46, 88],
+    profile: [41, 36, 48, 57, 47, 83],
     image: "/images/personalities/bling.png",
   },
   {
@@ -70,7 +70,7 @@ export const personalities: Personality[] = [
     name: "背景板",
     slogan: "我就在初级道来回，你们玩你们的",
     description: "你是雪场里最佛系的存在。初级道来回刷了三年，技术没怎么进步，但快乐指数一直很高。不跟别人比，不给自己压力，也不在乎别人怎么看。你就是来享受在雪上滑行的那种简单快乐。有时候你甚至觉得，那些拼命刷高级道的人，不如你活得明白。",
-    profile: [43, 38, 41, 36, 46, 38],
+    profile: [41, 36, 40, 36, 47, 33],
     image: "/images/personalities/npc.png",
   },
   {
@@ -79,7 +79,7 @@ export const personalities: Personality[] = [
     name: "戏精",
     slogan: "啊——我的膝盖——算了没事继续滑",
     description: "你摔跤的方式比你滑雪的方式更有观赏性。每次摔倒都像一出精心编排的话剧，表情到位、声音洪亮、肢体夸张。但三秒后你就站起来了，拍拍雪继续滑。你是雪场的开心果，缆车上的段子手，休息室里的社交中心。没有你，这个雪场会安静50%。",
-    profile: [50, 38, 71, 50, 46, 38],
+    profile: [50, 36, 68, 50, 47, 33],
     image: "/images/personalities/drama.png",
   },
   {
@@ -88,7 +88,7 @@ export const personalities: Personality[] = [
     name: "冷面杀手",
     slogan: "少说话，多刷道",
     description: "你是雪场里的幽灵。开门第一个上缆车，关门最后一个下山。中间不吃饭、不社交、不拍照、不休息。你的目标只有一个：刷道。你的技术精湛到可以在任何雪况下保持完美的刻滑。别人觉得你冷漠，但你只是不想把时间浪费在滑雪以外的事情上。雪季结束时你的滑行公里数是别人的三倍。",
-    profile: [57, 56, 24, 21, 27, 50],
+    profile: [59, 57, 32, 21, 27, 50],
     image: "/images/personalities/ice.png",
   },
   {
@@ -97,7 +97,7 @@ export const personalities: Personality[] = [
     name: "信号猎人",
     slogan: "这个位置有4G吗",
     description: "对你来说，滑雪是内容创作的一种形式。缆车上拍vlog，雪道上开直播，休息时修图发小红书。你对雪场每个角落的信号强度了如指掌。你的滑雪技术其实不差，但你的手机电量永远比体力先耗完。你的粉丝觉得你每天都在滑雪，其实你一半时间在拍素材。",
-    profile: [50, 38, 59, 57, 46, 50],
+    profile: [50, 36, 56, 57, 47, 50],
     image: "/images/personalities/wifi.png",
   },
   {
@@ -106,7 +106,7 @@ export const personalities: Personality[] = [
     name: "民间教练",
     slogan: "来，我教你，膝盖弯一点",
     description: "你可能没有教练证，但你教过的人比很多持证教练都多。看到新手摔跤你就忍不住上前指导，而且你教得还真不错。你的朋友圈子里一半人的滑雪技术都是你手把手教的。你最大的成就感不是自己滑了多难的道，而是你的学生第一次独立完成中级道时给你发的那条感谢消息。",
-    profile: [50, 38, 71, 36, 38, 50],
+    profile: [50, 36, 68, 36, 37, 50],
     image: "/images/personalities/sensei.png",
   },
   {
@@ -115,7 +115,7 @@ export const personalities: Personality[] = [
     name: "雪场贵宾",
     slogan: "我的季卡比你的年薪贵",
     description: "你不排队，因为你有VIP通道。你不租装备，因为你有专属储物柜。你不在公共休息室吃饭，因为你有包厢。滑雪对你来说是一种生活方式，而不仅仅是一项运动。你的技术说不上顶尖，但你的体验永远是满分。别人在排队的时候，你已经多滑了五趟。",
-    profile: [50, 38, 47, 57, 54, 88],
+    profile: [50, 36, 48, 57, 53, 83],
     image: "/images/personalities/vip.png",
   },
   {
@@ -124,7 +124,7 @@ export const personalities: Personality[] = [
     name: "企鹅",
     slogan: "我不是在摔，我是在跟地球拥抱",
     description: "你和地面的关系非常亲密——因为你大部分时间都趴在上面。但你从不放弃！每次摔倒你都会站起来，然后再摔倒。你的进步速度可能是全雪场最慢的，但你的乐观程度绝对是最高的。你用实际行动证明了一件事：滑雪的快乐跟技术水平完全无关。",
-    profile: [32, 25, 47, 36, 46, 38],
+    profile: [27, 21, 48, 36, 47, 33],
     image: "/images/personalities/penguin.png",
   },
   {
@@ -133,7 +133,7 @@ export const personalities: Personality[] = [
     name: "大神",
     slogan: "这个雪场的道不够我滑的",
     description: "你是传说中的存在。在你眼里，国内的雪场都太简单了。你的朋友圈全是日本、欧洲、北美的雪场打卡。你的技术无可挑剔，你的装备是真正为性能选的而不是为了好看。每次你出现在雪道上，旁边的人都会停下来看你滑。你从不炫耀，但你的存在本身就是一种炫耀。",
-    profile: [68, 75, 41, 36, 27, 63],
+    profile: [68, 71, 40, 36, 27, 67],
     image: "/images/personalities/pro.png",
   },
   {
@@ -142,7 +142,7 @@ export const personalities: Personality[] = [
     name: "雪场情侣",
     slogan: "我来滑雪是因为ta也来",
     description: "你的滑雪动力100%来自你的另一半。ta滑你就滑，ta不滑你绝对不会自己去。你们在雪道上手牵手（虽然这样很危险），在缆车上亲亲，在山顶拍合照。你的滑雪技术取决于你对象的耐心程度。如果有一天你们分手了，你的滑雪生涯可能也就结束了。",
-    profile: [43, 38, 59, 57, 46, 50],
+    profile: [41, 36, 56, 57, 47, 50],
     image: "/images/personalities/couple.png",
   },
   {
@@ -151,7 +151,7 @@ export const personalities: Personality[] = [
     name: "打卡收集者",
     slogan: "这个雪场我来过了，下一个",
     description: "你的目标不是把一个雪场滑好，而是把所有雪场都滑一遍。你有一个清单，上面列着国内外所有知名雪场，划掉一个开心一天。你对每个雪场的评价精确到缆车速度和厕所清洁度。你不一定是最厉害的滑手，但你一定是去过最多雪场的那个人。",
-    profile: [50, 56, 47, 36, 38, 38],
+    profile: [50, 57, 48, 36, 37, 33],
     image: "/images/personalities/stamp.png",
   },
   {
@@ -160,7 +160,7 @@ export const personalities: Personality[] = [
     name: "公园老鼠",
     slogan: "不跳一个就不算滑过雪",
     description: "对你来说，滑雪场只有一个区域是有意义的——地形公园。跳台、rails、box，这些才是真正的快乐。你可以在kicker前面排一下午的队也不觉得无聊。你的身上永远带着伤，但你的脸上永远带着笑。你的朋友都觉得你疯了，但在公园里，你才是最清醒的那个。",
-    profile: [57, 56, 59, 50, 27, 63],
+    profile: [59, 57, 56, 50, 27, 67],
     image: "/images/personalities/park.png",
   },
   {
@@ -169,7 +169,7 @@ export const personalities: Personality[] = [
     name: "摄影师",
     slogan: "等一下别动，光线刚好",
     description: "你来雪场带的最重要的装备不是雪板，是相机。你能在零下二十度的山顶趴在雪地上等一个完美的光线角度。你的朋友们又爱又恨你——爱你是因为你拍的照片确实好看，恨你是因为每次都要停下来给你当模特。你自己滑雪的时间可能不多，但你记录下了所有人最好的瞬间。",
-    profile: [43, 38, 59, 57, 54, 63],
+    profile: [41, 36, 56, 57, 53, 67],
     image: "/images/personalities/photo.png",
   },
   {
@@ -178,7 +178,7 @@ export const personalities: Personality[] = [
     name: "雪场醉侠",
     slogan: "滑前来一杯，滑后来一箱",
     description: "你坚信：微醺状态下滑雪才是最佳体验。午餐的热红酒是必须的，下午茶的啤酒是标配的，收板后的居酒屋是神圣的。你的转弯越来越飘逸，不是因为技术进步了，是因为酒劲上来了。大家都说你这样很危险，但你觉得这才是生活。",
-    profile: [50, 38, 59, 50, 65, 38],
+    profile: [50, 36, 56, 50, 63, 33],
     image: "/images/personalities/drunk.png",
   },
   {
@@ -187,7 +187,7 @@ export const personalities: Personality[] = [
     name: "首班缆车侠",
     slogan: "七点的雪道是我一个人的",
     description: "你的闹钟永远比同行的朋友早两个小时。当别人还在酒店赖床的时候，你已经在空无一人的雪道上完成了第一趟。你热爱清晨刚压完的绒雪面条，那种只属于你一个人的安静和完美。缺点是你下午两点就困了，经常在休息室睡着。",
-    profile: [57, 56, 24, 36, 27, 50],
+    profile: [59, 57, 32, 36, 27, 50],
     image: "/images/personalities/early.png",
   },
   {
@@ -196,7 +196,7 @@ export const personalities: Personality[] = [
     name: "万年租客",
     slogan: "买板子？滑几次值回票价啊",
     description: "你滑了五年雪，用的还是租的装备。不是因为你不爱滑雪，是因为你算过一笔账：一块板子的钱够你租50次了。你用着雪场最破的板子，滑出了不输自带装备选手的水平。装备党看到你都会陷入沉思：我花那么多钱到底图什么？",
-    profile: [50, 38, 41, 21, 46, 13],
+    profile: [50, 36, 40, 21, 47, 17],
     image: "/images/personalities/rental.png",
   },
   {
@@ -205,7 +205,7 @@ export const personalities: Personality[] = [
     name: "安全委员",
     slogan: "你们慢一点！前面有人！",
     description: "你是雪道上的移动交通警察。看到有人滑太快你会皱眉，看到有人不戴头盔你会上前提醒，看到有人在雪道中间停下来你会认真科普安全知识。你自己的装备永远是全套护具，你的滑行速度永远在安全范围内。你可能不是最受欢迎的人，但你一定是最负责任的。",
-    profile: [32, 25, 59, 36, 46, 63],
+    profile: [27, 21, 56, 36, 47, 67],
     image: "/images/personalities/safety.png",
   },
   {
@@ -214,7 +214,7 @@ export const personalities: Personality[] = [
     name: "团建之王",
     slogan: "一个人滑雪有什么意思",
     description: "你从不独自滑雪。每次出行都是十几个人的大团，微信群从出发前一周就开始热闹。你负责订酒店、租车、分配房间、制定行程。到了雪场你一半时间在协调大家去哪条道，另一半时间在拍集体照。你的滑雪水平一般，但你的组织能力是专业级的。",
-    profile: [43, 38, 71, 50, 46, 38],
+    profile: [41, 36, 68, 50, 47, 33],
     image: "/images/personalities/groupie.png",
   },
   {
@@ -223,7 +223,7 @@ export const personalities: Personality[] = [
     name: "禅者",
     slogan: "雪山即道场",
     description: "你滑雪的时候不听音乐、不说话、不拍照。你只是静静地感受脚下的雪、脸上的风、和远处的山。对你来说，滑雪是一种冥想，是城市生活的解毒剂。你不在乎今天刷了几趟道，只在乎那几个完全沉浸在当下的瞬间。你的朋友觉得你很奇怪，但你觉得他们才奇怪。",
-    profile: [50, 50, 24, 21, 38, 38],
+    profile: [50, 50, 32, 21, 37, 33],
     image: "/images/personalities/zen.png",
   },
   {
@@ -232,7 +232,7 @@ export const personalities: Personality[] = [
     name: "凡尔赛",
     slogan: "哎呀这个雪场一般般啦",
     description: `你去过的雪场永远比在座各位都高级。你不经意间提到"上次在二世谷"、"阿尔卑斯那边的雪比这好多了"、"惠斯勒的道才叫道"。你的滑雪技术确实不错，但你最擅长的技术是凡尔赛。不过平心而论，你推荐的雪场确实都挺好的。`,
-    profile: [57, 56, 59, 57, 46, 63],
+    profile: [59, 57, 56, 57, 47, 67],
     image: "/images/personalities/flex.png",
   },
 ];
