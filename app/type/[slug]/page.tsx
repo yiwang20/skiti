@@ -32,16 +32,27 @@ export default function TypeDetailPage({
       </div>
 
       <div className="bg-[var(--color-card)] rounded-2xl border border-[var(--color-border)] p-6 md:p-8 mb-8">
-        <p className="text-xs font-mono text-[var(--color-text-secondary)] mb-1">
-          {personality.code}
-        </p>
-        <h1 className="text-3xl font-bold mb-2">{personality.name}</h1>
-        <p className="text-[var(--color-primary)] font-medium mb-4">
-          {personality.slogan}
-        </p>
-        <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          {personality.description}
-        </p>
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="w-40 h-40 shrink-0 flex items-center justify-center bg-[var(--color-primary-light)] rounded-xl overflow-hidden">
+            <img
+              src={personality.image}
+              alt={personality.name}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs font-mono text-[var(--color-text-secondary)] mb-1">
+              {personality.code}
+            </p>
+            <h1 className="text-3xl font-bold mb-2">{personality.name}</h1>
+            <p className="text-[var(--color-primary)] font-medium mb-4">
+              {personality.slogan}
+            </p>
+            <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              {personality.description}
+            </p>
+          </div>
+        </div>
       </div>
 
       <section className="mb-10">
