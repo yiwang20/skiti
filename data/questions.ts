@@ -30,7 +30,7 @@ export const questions: Question[] = [
       // 早起：早起党签名（独占）
       A: { early: 10, powder: 2 },
       // 优雅迟到：时尚/社交型，悠闲节奏
-      B: { bling: 3, couple: 3, drunk: 2, ootd: 4, stamp: 2 },
+      B: { bling: 3, couple: 3, drunk: 2, ootd: 5, stamp: 2 },
       // 下午才到：摸鱼型 + 宿醉 + 决策慢
       C: { drunk: 4, sit: 2, sofa: 5, xjbh: 5 } } },
   {
@@ -215,30 +215,6 @@ export const questions: Question[] = [
       C: { couple: 5, drama: 4, npc: 2, ootd: 3, rip: 3, sofa: 1, wifi: 5 } } },
   {
     id: 17,
-    text: "山顶面前两条道，你怎么选？",
-    options: ["看一眼直接选，凭感觉", "查地图研究一会儿", "等别人先下，看效果再决定"],
-    kind: "diagnostic",
-    effects: {
-      // 凭感觉：莽 + 自信
-      A: { "404": 2, cliff: 3, drunk: 2, mri: 2, speed: 4, xjbh: 5, yolo: 5 },
-      // 查地图：选道困难症签名 + KPI 数据决策
-      B: { couple: 2, kpi: 4, powder: 2, safety: 3, stamp: 3, tree: 4 },
-      // 等别人先下：跟随型
-      C: { npc: 2, pizza: 3, rental: 2, sit: 1 } } },
-  {
-    id: 18,
-    text: "你是怎么学会滑雪的？",
-    options: ["正经请教练系统学", "朋友带，教了点基础", "完全自学，靠摔会的"],
-    kind: "diagnostic",
-    effects: {
-      // 请教练：正规 + PRO 系统训练路径
-      A: { bling: 5, couple: 2, mri: 2, ootd: 2, pizza: 4, pro: 4, safety: 3 },
-      // 朋友带
-      B: { couple: 3, drunk: 1, npc: 2, rental: 3, stamp: 2 },
-      // 自学摔会：瞎几把滑签名
-      C: { "404": 2, cliff: 3, drunk: 2, mri: 3, park: 3, speed: 2, tree: 3, xjbh: 5, yolo: 5, yyds: 5 } } },
-  {
-    id: 19,
     text: "上山的路上你发现手机只剩 5% 电了，你？",
     options: ["立刻关机省电，留给紧急情况", "算了，反正下午也用不上", "立马拍最后一段 vlog 发出去"],
     kind: "absurd",
@@ -250,7 +226,7 @@ export const questions: Question[] = [
       // 拍最后 vlog：内容党
       C: { bling: 3, drama: 3, ootd: 4, rip: 4, wifi: 5, xjbh: 2 } } },
   {
-    id: 20,
+    id: 18,
     text: "有人在你面前摔了一个超夸张的跟头，你？",
     options: ["赶紧上去问他没事吧", "先确认他没事，然后忍不住笑", "掏出手机——这段可以发抖音"],
     kind: "absurd",
@@ -262,7 +238,7 @@ export const questions: Question[] = [
       // 拍抖音：内容党
       C: { bling: 2, drama: 4, ootd: 3, rip: 4, wifi: 5, xjbh: 2 } } },
   {
-    id: 21,
+    id: 19,
     text: "你选雪场最看重？",
     options: ["雪道难度和雪质", "交通方便、设施好", "餐厅好不好吃、酒店舒不舒服"],
     kind: "diagnostic",
@@ -274,7 +250,7 @@ export const questions: Question[] = [
       // 餐厅酒店：享受党
       C: { bling: 3, drama: 3, drunk: 3, ootd: 4, rip: 2, sit: 3, sofa: 5, wifi: 5 } } },
   {
-    id: 22,
+    id: 20,
     text: "你在雪道上被一个小朋友超了，你？",
     options: ["无所谓，小孩子嘛", "加速追上去然后假装只是顺路", "当场宣布退役"],
     kind: "absurd",
@@ -286,7 +262,7 @@ export const questions: Question[] = [
       // 退役：戏精
       C: { drama: 5, pizza: 3, rental: 2, rip: 5, sofa: 2 } } },
   {
-    id: 23,
+    id: 21,
     text: "下午三点，你在？",
     options: ["还在刷道，刷到闭园再说", "休息室喝杯咖啡，准备最后两趟", "已经在山下吃火锅/泡温泉"],
     kind: "diagnostic",
@@ -298,7 +274,7 @@ export const questions: Question[] = [
       // 山下温泉火锅：摸鱼派 + 早起的人累了已经走了
       C: { drunk: 4, early: 6, ootd: 3, rental: 2, sit: 4, sofa: 5 } } },
   {
-    id: 24,
+    id: 22,
     text: "你今年比去年技术上有什么进步？",
     options: ["明显进步，能下更难的道", "原地踏步，还是那样", "今年没怎么滑，没法判断"],
     kind: "diagnostic",
@@ -310,7 +286,7 @@ export const questions: Question[] = [
       // 今年没怎么滑：休闲型
       C: { mri: 4, ootd: 3, rental: 2, rip: 4, sit: 2, sofa: 2 } } },
   {
-    id: 25,
+    id: 23,
     text: "看到一片小树林，你？",
     options: ["肯定不去，太危险了", "看心情，可能溜一圈", "我的心头好，必去"],
     kind: "absurd",
@@ -322,7 +298,7 @@ export const questions: Question[] = [
       // 必去：树林党签名
       C: { "404": 4, cliff: 2, powder: 3, tree: 5, yolo: 3 } } },
   {
-    id: 26,
+    id: 24,
     text: "雪场有个 park 区（跳台/rails），你？",
     options: ["不进去，那是外星人玩的", "看看就好，偶尔玩玩小的", "我的整个雪季都为了这个"],
     kind: "absurd",
@@ -334,19 +310,7 @@ export const questions: Question[] = [
       // 整个雪季为了这个：公园老鼠签名
       C: { cliff: 5, park: 5, xjbh: 4, yyds: 5 } } },
   {
-    id: 27,
-    text: "为什么愿意/不愿意特地飞日本/北海道？",
-    options: ["没去过，没必要", "想去打个卡，听说不错", "为了那里的粉雪，每年必去"],
-    kind: "absurd",
-    effects: {
-      // 没去过没必要：本地党
-      A: { mri: 3, npc: 3, pizza: 4, rental: 4, sit: 2, sofa: 1, xjbh: 2 },
-      // 打个卡：集邮型
-      B: { bling: 3, couple: 3, ootd: 3, rip: 5, stamp: 5, wifi: 5 },
-      // 为了粉雪：国际派
-      C: { "404": 3, cliff: 4, park: 2, powder: 5, pro: 4, tree: 3, yyds: 5 } } },
-  {
-    id: 28,
+    id: 25,
     text: "你在雪场排队等缆车，前面至少要等 20 分钟，你？",
     options: ["等，这条道值得", "换一条不排队的道", "算了去喝咖啡，等人少了再来"],
     kind: "diagnostic",
@@ -358,7 +322,7 @@ export const questions: Question[] = [
       // 喝咖啡再来：摸鱼
       C: { bling: 2, drama: 3, drunk: 3, ootd: 3, rental: 2, rip: 2, sit: 4, sofa: 4 } } },
   {
-    id: 29,
+    id: 26,
     text: "雪场餐厅有热红酒/啤酒，你？",
     options: ["下午要滑，不喝", "尝两口意思一下", "来一壶，下午滑得更飘"],
     kind: "absurd",
@@ -370,7 +334,7 @@ export const questions: Question[] = [
       // 来一壶：醉侠签名
       C: { cliff: 3, drama: 2, drunk: 5, mri: 2, sofa: 2, xjbh: 4, yolo: 4 } } },
   {
-    id: 30,
+    id: 27,
     text: "你滑雪受伤后的朋友圈大概是？",
     options: ["不发，自己默默处理", "发一张冰敷照配文'还活着'", "九宫格 + 三百字小作文：'家人们这辈子滑雪生涯就到这了'"],
     kind: "absurd",
@@ -382,7 +346,7 @@ export const questions: Question[] = [
       // 九宫格小作文：报丧员签名
       C: { drama: 5, ootd: 4, rip: 5, wifi: 5 } } },
   {
-    id: 31,
+    id: 28,
     text: "你的雪板/头盔上贴了几张贴纸/徽章？",
     options: ["干干净净，原装", "几张，是几个有意义的雪场", "贴满了，每去一个新雪场加一张"],
     kind: "diagnostic",
@@ -394,19 +358,7 @@ export const questions: Question[] = [
       // 贴满：打卡党签名
       C: { bling: 2, park: 3, stamp: 5, yyds: 3 } } },
   {
-    id: 32,
-    text: "雪场有测速牌，你的反应？",
-    options: ["不在意，速度不是重点", "瞄一眼自己时速", "今天目标 80 km/h，必须破纪录"],
-    kind: "absurd",
-    effects: {
-      // 不在意：非速度向
-      A: { "404": 2, couple: 2, npc: 2, ootd: 3, pizza: 4, powder: 2, rental: 3, safety: 2, sit: 1, sofa: 2, tree: 3 },
-      // 瞄一眼：好奇 + KPI 看数据
-      B: { bling: 3, kpi: 3, stamp: 3, yyds: 4 },
-      // 80 km/h：速度狂签名
-      C: { cliff: 3, mri: 2, speed: 5, xjbh: 4, yolo: 5 } } },
-  {
-    id: 33,
+    id: 29,
     text: "你滑雪日里坐在雪地上发呆最长的一次是多久？",
     options: ["没坐过，摔了立刻起来", "几分钟，缓一下", "至少半小时，被救援队问候过"],
     kind: "absurd",
@@ -418,19 +370,19 @@ export const questions: Question[] = [
       // 至少半小时：坐山雕签名
       C: { "404": 2, drunk: 2, npc: 2, sit: 5, sofa: 3 } } },
   {
-    id: 34,
-    text: "看到一个 5 米高的雪檐悬崖，你？",
-    options: ["绕开，看都不看", "看一眼，留个念想", "起飞"],
+    id: 30,
+    text: "雪道边立着一个'危险，请勿进入'的牌子，你？",
+    options: ["立刻退两步，安全第一", "站在牌子前拍照发朋友圈", "...（已经在牌子后面了）"],
     kind: "absurd",
     effects: {
-      // 绕开：保守
-      A: { npc: 3, ootd: 2, pizza: 3, rental: 4, safety: 5, sit: 2, sofa: 1 },
-      // 看一眼：欣赏型
-      B: { "404": 2, couple: 2, early: 2, powder: 4, stamp: 2, tree: 4 },
-      // 起飞：跳崖党签名
-      C: { cliff: 5, mri: 4, park: 4, speed: 2, xjbh: 3, yolo: 5 } } },
+      // 立刻退两步：守规矩 + 安全党
+      A: { "404": 2, npc: 3, pizza: 3, rental: 3, safety: 5, sit: 2, sofa: 1 },
+      // 拍照发圈：内容创作 + 装备党 + 戏精
+      B: { bling: 3, drama: 3, ootd: 4, rip: 3, stamp: 2, wifi: 5 },
+      // 已经在牌子后面：CLIFF 签名 + 莽 + 瞎几把
+      C: { "404": 2, cliff: 5, drunk: 2, mri: 4, park: 2, speed: 2, xjbh: 5, yolo: 5 } } },
   {
-    id: 35,
+    id: 31,
     text: "如果你的滑雪板会说话，它最可能说的是？",
     options: ["求你了轻点", '"我们又来这条道了？第 47 次了"', "你根本配不上我"],
     kind: "absurd",
@@ -442,7 +394,7 @@ export const questions: Question[] = [
       // 配不上我：装备党
       C: { bling: 5, ootd: 4, park: 2, rip: 2, speed: 3, wifi: 5, yyds: 4 } } },
   {
-    id: 36,
+    id: 32,
     text: "你滑雪戴运动手环/记 GPS 数据吗？",
     options: ["戴，每天都看数据", "戴，但不怎么看", "不戴，没必要"],
     kind: "diagnostic",
