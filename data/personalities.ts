@@ -92,15 +92,6 @@ export const personalities: Personality[] = [
     image: "/images/personalities/wifi.png",
   },
   {
-    slug: "penguin",
-    code: "PENGUIN",
-    name: "企鹅",
-    slogan: "我不是在摔，我是在跟地球拥抱",
-    description: "你和地面的关系非常亲密——因为你大部分时间都趴在上面。但你从不放弃！每次摔倒你都会站起来，然后再摔倒。你的进步速度可能是全雪场最慢的，但你的乐观程度绝对是最高的。你用实际行动证明了一件事：滑雪的快乐跟技术水平完全无关。",
-    profile: [27, 17, 48, 36, 47, 33],
-    image: "/images/personalities/penguin.png",
-  },
-  {
     slug: "pro",
     code: "PRO",
     name: "大神",
