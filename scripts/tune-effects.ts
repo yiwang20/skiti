@@ -32,13 +32,20 @@ function scoreOf(answers: number[], slug: string): number {
 }
 
 function idealAnswers(slug: string): number[] {
+  // Pick option that maximizes (slug points - max competitor points)
   return eff.map((e) => {
     let bestI = 0;
-    let bestV = -Infinity;
+    let bestAdv = -Infinity;
     for (let i = 0; i < 3; i++) {
-      const v = e[OPTIONS[i]][slug] ?? 0;
-      if (v > bestV) {
-        bestV = v;
+      const opt = e[OPTIONS[i]];
+      const slugPts = opt[slug] ?? 0;
+      let maxOther = 0;
+      for (const [k, v] of Object.entries(opt)) {
+        if (k !== slug && v > maxOther) maxOther = v;
+      }
+      const adv = slugPts - maxOther;
+      if (adv > bestAdv) {
+        bestAdv = adv;
         bestI = i;
       }
     }

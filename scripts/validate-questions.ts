@@ -13,13 +13,21 @@ import {
 const OPTIONS = ["A", "B", "C"] as const;
 
 function idealAnswersFor(slug: string): number[] {
+  // Pick option that maximizes (slug points - max competitor points)
+  // This avoids the bug where slug=0 defaults to A and lets competitors accumulate
   return questions.map((q) => {
     let bestIdx = 0;
-    let bestPoints = -Infinity;
+    let bestAdvantage = -Infinity;
     for (let i = 0; i < 3; i++) {
-      const pts = q.effects[OPTIONS[i]][slug] ?? 0;
-      if (pts > bestPoints) {
-        bestPoints = pts;
+      const opt = q.effects[OPTIONS[i]];
+      const slugPts = opt[slug] ?? 0;
+      let maxOther = 0;
+      for (const [k, v] of Object.entries(opt)) {
+        if (k !== slug && v > maxOther) maxOther = v;
+      }
+      const advantage = slugPts - maxOther;
+      if (advantage > bestAdvantage) {
+        bestAdvantage = advantage;
         bestIdx = i;
       }
     }

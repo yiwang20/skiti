@@ -74,15 +74,6 @@ export const personalities: Personality[] = [
     image: "/images/personalities/drama.png",
   },
   {
-    slug: "ice",
-    code: "ICE",
-    name: "冷面杀手",
-    slogan: "少说话，多刷道",
-    description: "你是雪场里的幽灵。开门第一个上缆车，关门最后一个下山。中间不吃饭、不社交、不拍照、不休息。你的目标只有一个：刷道。你的技术精湛到可以在任何雪况下保持完美的刻滑。别人觉得你冷漠，但你只是不想把时间浪费在滑雪以外的事情上。雪季结束时你的滑行公里数是别人的三倍。",
-    profile: [59, 58, 30, 21, 27, 50],
-    image: "/images/personalities/ice.png",
-  },
-  {
     slug: "wifi",
     code: "WIFI",
     name: "信号猎人",
