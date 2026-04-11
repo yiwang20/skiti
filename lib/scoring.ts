@@ -1,52 +1,77 @@
 import { questions } from "@/data/questions";
 import { personalities, Personality } from "@/data/personalities";
-import { dimensions } from "@/data/dimensions";
 
 type Scores = [number, number, number, number, number, number];
 
-export function computeScores(answers: number[]): Scores {
-  const dimIds = dimensions.map((d) => d.id);
-  const rawScores = new Array(6).fill(0);
-  const maxPossible = new Array(6).fill(0);
+const OPTIONS = ["A", "B", "C"] as const;
+
+/** Compute raw points for every personality from a set of answers. */
+export function computePersonalityScores(
+  answers: number[]
+): Record<string, number> {
+  const scores: Record<string, number> = {};
+  for (const p of personalities) scores[p.slug] = 0;
 
   questions.forEach((q, qi) => {
-    const answer = answers[qi] ?? 1;
-    q.effects.forEach((effect) => {
-      const dimIndex = dimIds.indexOf(effect.dim);
-      if (dimIndex === -1) return;
-      rawScores[dimIndex] += effect.scores[answer];
-      maxPossible[dimIndex] += Math.max(...effect.scores);
-    });
+    const a = answers[qi];
+    if (a == null || a < 0 || a > 2) return;
+    const optKey = OPTIONS[a];
+    const effect = q.effects[optKey];
+    if (!effect) return;
+    for (const [slug, points] of Object.entries(effect)) {
+      if (slug in scores) scores[slug] += points;
+    }
   });
 
-  return dimIds.map((_, i) => {
-    if (maxPossible[i] === 0) return 50;
-    const minPossible = questions.reduce((sum, q) => {
-      const effect = q.effects.find((e) => e.dim === dimIds[i]);
-      return sum + (effect ? Math.min(...effect.scores) : 0);
-    }, 0);
-    const normalized =
-      ((rawScores[i] - minPossible) / (maxPossible[i] - minPossible)) * 100;
-    return Math.round(Math.min(100, Math.max(0, normalized)));
-  }) as Scores;
+  return scores;
 }
 
-export function matchPersonality(scores: Scores): Personality {
-  let bestMatch = personalities[0];
-  let bestDistance = Infinity;
-
+/** Return the top match (highest score; ties broken by personality order). */
+export function matchPersonality(answers: number[]): Personality {
+  const scores = computePersonalityScores(answers);
+  let best: Personality = personalities[0];
+  let bestScore = -Infinity;
   for (const p of personalities) {
-    const distance = Math.sqrt(
-      p.profile.reduce(
-        (sum, val, i) => sum + Math.pow(val - scores[i], 2),
-        0
-      )
-    );
-    if (distance < bestDistance) {
-      bestDistance = distance;
-      bestMatch = p;
+    if (scores[p.slug] > bestScore) {
+      bestScore = scores[p.slug];
+      best = p;
     }
   }
+  return best;
+}
 
-  return bestMatch;
+/** Return top N matches with their scores. */
+export function getTopMatches(
+  answers: number[],
+  n = 3
+): Array<{ personality: Personality; score: number }> {
+  const scores = computePersonalityScores(answers);
+  return personalities
+    .map((p) => ({ personality: p, score: scores[p.slug] }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, n);
+}
+
+/**
+ * Compute the displayed dimension bars from answers.
+ * Strategy: blended profile of top-3 matches, weighted by score.
+ * This makes the bars personality-aware while preserving slight user variation.
+ */
+export function computeScores(answers: number[]): Scores {
+  const top = getTopMatches(answers, 3);
+  if (top.length === 0 || top[0].score <= 0) {
+    return [50, 50, 50, 50, 50, 50];
+  }
+  const totalWeight = top.reduce((s, t) => s + Math.max(0, t.score), 0);
+  if (totalWeight <= 0) {
+    return top[0].personality.profile.slice() as Scores;
+  }
+  const blended = [0, 0, 0, 0, 0, 0];
+  for (const { personality, score } of top) {
+    const w = Math.max(0, score) / totalWeight;
+    personality.profile.forEach((v, i) => {
+      blended[i] += v * w;
+    });
+  }
+  return blended.map((v) => Math.round(v)) as Scores;
 }

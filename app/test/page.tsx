@@ -41,8 +41,8 @@ export default function TestPage() {
           setCurrentIndex((i) => i + 1);
         } else {
           const finalAnswers = newAnswers.map((a) => a ?? 1);
+          const personality = matchPersonality(finalAnswers);
           const scores = computeScores(finalAnswers);
-          const personality = matchPersonality(scores);
           const encoded = encodeScores(scores);
           router.push(`/result/${personality.slug}?s=${encoded}`);
         }

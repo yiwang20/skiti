@@ -1,296 +1,420 @@
 export interface Question {
   id: number;
   text: string;
-  options: [string, string, string]; // A, B, C
-  /** Which dimensions this question affects: [dimensionId, scoreA, scoreB, scoreC] */
-  effects: Array<{ dim: string; scores: [number, number, number] }>;
+  options: [string, string, string];
+  /** Per-option personality point awards (slug -> points). */
+  effects: {
+    A: Record<string, number>;
+    B: Record<string, number>;
+    C: Record<string, number>;
+  };
+  /** "diagnostic" probes core behavior; "absurd" is fun/wacky scenario */
+  kind: "diagnostic" | "absurd";
 }
+
+// Design rules for effects:
+//  - Each option awards points to at most ~5 personalities.
+//  - 5 = signature (only this personality, or at most 1-2 others)
+//  - 3 = strong fit
+//  - 2 = moderate fit
+//  - No 1-point padding. Don't give weak fits points; let them be 0.
+//  - Each personality should win on ~5-8 questions (sum of max points).
 
 export const questions: Question[] = [
   {
     id: 1,
-    text: "缆车上你一般在干嘛？",
-    options: ["复盘刚才那条线", "刷手机", "跟旁边陌生人聊今天雪况"],
-    effects: [
-      { dim: "s1", scores: [3, 2, 1] },
-      { dim: "s3", scores: [1, 2, 3] },
-    ],
+    text: "你滑雪日的早晨大概是？",
+    options: ["5 点起床赶第一班缆车", "10 点优雅到达，先吃个早餐", "下午两三点才出现"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 3, early: 5, kpi: 2, powder: 3 },
+      B: { bling: 3, couple: 2, ootd: 1, stamp: 2 },
+      C: { drunk: 1, sit: 2, sofa: 4, taxi: 2 },
+    },
   },
   {
     id: 2,
-    text: "你摔倒的时候雪镜飞了，帽子也飞了，手套也飞了，你第一反应？",
-    options: ["先找手机看碎没碎", "保持摔倒的姿势不动，假装在做雪天使", `大喊"有没有人帮我录到了"`],
-    effects: [
-      { dim: "s3", scores: [1, 2, 3] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "今天结束你滑了几趟？",
+    options: ["数不过来，反正没停过", "心里有数，10-15 趟左右", "三五趟够本了"],
+    kind: "diagnostic",
+    effects: {
+      A: { early: 5, ice: 2, kpi: 2, pro: 2, speed: 3 },
+      B: { couple: 1, park: 4, powder: 4, stamp: 2, tree: 4 },
+      C: { ootd: 1, pizza: 5, sit: 2, sofa: 3, taxi: 2, tbd: 4 },
+    },
   },
   {
     id: 3,
-    text: "如果你的滑雪板会说话，它最可能说的是？",
-    options: ["求你了轻点", "我们又来这条道了？第47次了", "你根本配不上我"],
-    effects: [
-      { dim: "s1", scores: [3, 1, 2] },
-      { dim: "s6", scores: [1, 2, 3] },
-    ],
+    text: "中午你的午饭计划？",
+    options: ["雪场快餐 10 分钟搞定", "山下找了一家正经火锅店，吃两小时", "随便对付，主要是要喝两杯"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 3, ice: 1, kpi: 1, powder: 3, speed: 4 },
+      B: { couple: 2, ootd: 1, sit: 1, sofa: 4 },
+      C: { drunk: 3, xjbh: 2, yolo: 4 },
+    },
   },
   {
     id: 4,
-    text: "你在雪场看到有人穿西装打领带在滑雪，你？",
-    options: ["这人比我有排面", "过去问他是不是刚开完会", "明天我也穿"],
-    effects: [
-      { dim: "s4", scores: [2, 1, 3] },
-      { dim: "s3", scores: [1, 3, 2] },
-    ],
+    text: "你刚结结实实摔了一个，第一反应？",
+    options: ["立刻爬起来分析动作哪儿不对", "在雪地上躺一会儿喘口气", "掏手机看刚才那段拍下来没"],
+    kind: "diagnostic",
+    effects: {
+      A: { kpi: 3, pizza: 3, pro: 2, safety: 4 },
+      B: { mri: 4, pua: 4, sit: 4, sofa: 2 },
+      C: { drama: 1, ootd: 1, rip: 5, wifi: 5 },
+    },
   },
   {
     id: 5,
-    text: "你在缆车上，前面的人雪板上绑了一只毛绒企鹅，你？",
-    options: ["我也想要一只", `默默拍照发朋友圈"今日雪场显眼包"`, "下缆车后跟着他滑了三趟试图搭讪问哪买的"],
-    effects: [
-      { dim: "s4", scores: [2, 1, 3] },
-      { dim: "s3", scores: [1, 2, 3] },
-    ],
+    text: "你的雪服是什么调调？",
+    options: ["黑灰为主，越低调越好", "中性色但注意搭配", "全套色彩拼接，恨不得发光"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 2, ice: 2, pro: 1, sit: 1, tree: 2 },
+      B: { couple: 1, npc: 4, rental: 4, safety: 4, stamp: 1 },
+      C: { bling: 5, drama: 1, ootd: 3, park: 3, wifi: 4 },
+    },
   },
   {
     id: 6,
-    text: "雪具室里你的板子是？",
-    options: ["租的，能滑就行", "自己的板，用了几年了", "限量联名款，比我滑得好"],
-    effects: [{ dim: "s6", scores: [1, 2, 3] }],
+    text: "你滑雪用的板子是？",
+    options: ["顶级品牌限量款，价格不忍直视", "自有，普通款，用了几年了", "永远是租的"],
+    kind: "diagnostic",
+    effects: {
+      A: { bling: 5, powder: 3, pro: 2, speed: 3, yyds: 4 },
+      B: { "404": 2, early: 5, ice: 1, kpi: 1, tree: 3 },
+      C: { pizza: 4, rental: 5, taxi: 2, tbd: 2, xjbh: 2 },
+    },
   },
   {
     id: 7,
-    text: "下午三点，你在？",
-    options: ["还在刷道", "休息室喝杯咖啡准备最后几趟", "已经在山下吃火锅了"],
-    effects: [{ dim: "s5", scores: [1, 2, 3] }],
+    text: "你今天穿了多少护具？",
+    options: ["头盔护甲护膝护腕全套", "就一个头盔意思一下", "护具？能吃吗？"],
+    kind: "diagnostic",
+    effects: {
+      A: { park: 4, pizza: 1, safety: 4, tbd: 2 },
+      B: { "404": 1, early: 5, ice: 1, powder: 2, tree: 2 },
+      C: { cliff: 4, mri: 5, speed: 1, xjbh: 3, yolo: 5 },
+    },
   },
   {
     id: 8,
-    text: "你滑到一半，发现前面有个大爷在雪道正中间打太极，你？",
-    options: [
-      "绕开，不打扰大爷修行",
-      "停下来静静欣赏一会儿",
-      "凑过去问能不能加入",
-    ],
-    effects: [
-      { dim: "s1", scores: [2, 1, 3] },
-      { dim: "s3", scores: [1, 2, 3] },
-    ],
+    text: '朋友说"X 总，下黑道你肯定没问题"，你？',
+    options: ["我可不上当，知之为知之", "犹豫一下被推上去了", "他说得对，我去，反正没死过人"],
+    kind: "absurd",
+    effects: {
+      A: { pizza: 3, rental: 3, safety: 3, sit: 2, tbd: 5 },
+      B: { drama: 1, mri: 3, pua: 5, taxi: 2 },
+      C: { cliff: 3, speed: 2, xjbh: 4, yolo: 5 },
+    },
   },
   {
     id: 9,
-    text: "你的雪服颜色是？",
-    options: ["黑灰为主，低调实用", "有点颜色但不夸张", "全身荧光色，生怕别人看不见我"],
-    effects: [{ dim: "s4", scores: [1, 2, 3] }],
+    text: "缆车上你大概率在干什么？",
+    options: ["复盘刚才那条线，想动作要领", "刷手机或者跟旁边人聊天", "看四周风景，啥都不想"],
+    kind: "diagnostic",
+    effects: {
+      A: { ice: 2, kpi: 2, pro: 1, speed: 2 },
+      B: { couple: 3, drama: 3, drunk: 2, stamp: 1, wifi: 4 },
+      C: { "404": 2, npc: 3, sit: 3, sofa: 2, tree: 1 },
+    },
   },
   {
     id: 10,
-    text: "有人在你面前摔了一个超夸张的跟头，你？",
-    options: ["赶紧上去问他没事吧", "先确认他没事，然后忍不住笑", "掏出手机——这段可以发抖音"],
-    effects: [
-      { dim: "s3", scores: [2, 2, 3] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "今年雪季你身上有几处伤？",
+    options: ["零伤，我命大", "几处淤青，正常", "膝盖/手腕至少一处去过医院"],
+    kind: "diagnostic",
+    effects: {
+      A: { pizza: 1, safety: 1, sit: 1, sofa: 1, tbd: 1 },
+      B: { drama: 1, kpi: 3, powder: 2, stamp: 1, tree: 3 },
+      C: { cliff: 5, mri: 5, park: 2, xjbh: 3, yolo: 5 },
+    },
   },
   {
     id: 11,
-    text: "缆车停在半空中纹丝不动 5 分钟了，你？",
-    options: [
-      "开始跟对面缆车的陌生人隔空喊话",
-      `淡定掏出手机拍 vlog"家人们这是山顶限定"`,
-      "默默开始在心里写遗书",
-    ],
-    effects: [
-      { dim: "s3", scores: [3, 2, 1] },
-      { dim: "s4", scores: [1, 3, 1] },
-    ],
+    text: "雪季中你最享受的瞬间是？",
+    options: ["完美刻出一条长弯", "粉雪里飘起来的那一刻", "山下温泉/啤酒/火锅下肚的瞬间"],
+    kind: "absurd",
+    effects: {
+      A: { ice: 1, kpi: 1, pro: 1, speed: 2 },
+      B: { "404": 1, cliff: 3, powder: 4, tree: 3 },
+      C: { drunk: 4, sit: 1, sofa: 3 },
+    },
   },
   {
     id: 12,
-    text: "你的滑雪朋友圈画风是？",
-    options: ["很少发，滑就完了", "偶尔发个风景或者滑行视频", "九宫格精修图+详细文案+定位"],
-    effects: [
-      { dim: "s3", scores: [1, 2, 3] },
-      { dim: "s4", scores: [1, 2, 3] },
-    ],
+    text: "你最常出现在哪种雪道？",
+    options: ["黑道，越陡越爽", "中级红道，舒服又有挑战", "永远的绿道蓝道，安全第一"],
+    kind: "diagnostic",
+    effects: {
+      A: { cliff: 4, mri: 2, pro: 1, speed: 3, yolo: 5 },
+      B: { couple: 2, drunk: 2, kpi: 1, park: 2, stamp: 1, tree: 2, yyds: 4 },
+      C: { npc: 2, pizza: 3, rental: 3, safety: 2, taxi: 2, tbd: 1 },
+    },
   },
   {
     id: 13,
-    text: "如果雪场有蹦迪夜场，你去吗？",
-    options: ["不去，我是来滑雪的", "看情况，人多热闹去凑个乐", "我就是为这个来的，雪都不用下"],
-    effects: [
-      { dim: "s3", scores: [1, 2, 3] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "你的滑雪相关朋友圈发得多吗？",
+    options: ["几乎不发，发了也是滑行视频", "去了发一条纪念", "九宫格精修+长文案，必须发"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 1, ice: 1, powder: 1, pro: 3, sit: 1 },
+      B: { couple: 3, drunk: 2, npc: 3, stamp: 3 },
+      C: { drama: 2, ootd: 3, rip: 5, wifi: 4 },
+    },
   },
   {
     id: 14,
-    text: "你摔了一个大跟头，旁边有人在看，你会？",
-    options: ["立刻站起来假装没事然后默默检查有没有骨折", "躺在雪地上不动等人来问你还好吗", "摔得太帅了，让朋友把刚才那段发给我"],
-    effects: [
-      { dim: "s3", scores: [1, 2, 3] },
-      { dim: "s1", scores: [2, 1, 3] },
-    ],
+    text: "看到限量新装备，你的反应是？",
+    options: ["不看，能用就行", "看一眼，记下来回去研究", "管它有用没有，先入手"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 1, rental: 4, sit: 1, sofa: 2, taxi: 2 },
+      B: { kpi: 2, park: 2, powder: 3, pro: 1, stamp: 3, tree: 2, yyds: 5 },
+      C: { bling: 5, ootd: 2, wifi: 2 },
+    },
   },
   {
     id: 15,
-    text: "你在雪道上被一个小朋友超了，你？",
-    options: ["无所谓，小孩子嘛", "加速追上去然后假装只是顺路", "当场宣布退役"],
-    effects: [
-      { dim: "s1", scores: [1, 3, 2] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "单板还是双板？",
+    options: ["双板，技术更细腻", "单板，懂的都懂", "无所谓，看心情"],
+    kind: "absurd",
+    effects: {
+      A: { ice: 1, kpi: 1, pizza: 1, pro: 1, safety: 3, speed: 2 },
+      B: { cliff: 2, drunk: 2, park: 4, yyds: 5 },
+      C: { couple: 1, sit: 1, sofa: 1, stamp: 2, taxi: 2 },
+    },
   },
   {
     id: 16,
-    text: `雪场广播响起"请问哪位滑友丢了一只左脚雪鞋"，你？`,
-    options: [
-      "事不关己，继续滑",
-      "默默低头看了看自己的脚",
-      "冲过去说是我的（虽然并不是）",
-    ],
-    effects: [
-      { dim: "s3", scores: [1, 2, 3] },
-      { dim: "s5", scores: [1, 1, 3] },
-    ],
+    text: "你的滑雪日常更多是？",
+    options: ["一个人来一个人走", "两三个老朋友一起", "十几人大团，热闹"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 1, early: 4, ice: 2, powder: 1, pro: 1, sit: 1, tree: 2 },
+      B: { couple: 5, drunk: 1, pua: 3, stamp: 1, yyds: 2 },
+      C: { drama: 2, drunk: 2, ootd: 2, rip: 5, taxi: 4, wifi: 2 },
+    },
   },
   {
     id: 17,
-    text: "你的滑雪包里一定有？",
-    options: ["备用手套和暖宝宝", "零食和充电宝", "自拍杆和补妆镜"],
-    effects: [
-      { dim: "s4", scores: [1, 2, 3] },
-      { dim: "s5", scores: [1, 3, 2] },
-    ],
+    text: "山顶面前两条道，你怎么选？",
+    options: ["看一眼直接选，凭感觉", "查地图研究一会儿", "等别人先下，看效果再决定"],
+    kind: "diagnostic",
+    effects: {
+      A: { cliff: 3, ice: 1, pro: 2, speed: 1, xjbh: 3, yolo: 3 },
+      B: { kpi: 2, safety: 3, stamp: 2, tbd: 5 },
+      C: { npc: 2, pizza: 3, pua: 4, sit: 2, taxi: 4 },
+    },
   },
   {
     id: 18,
-    text: "下雪天你的反应是？",
-    options: ["查雪场实时雪况，计划周末出发", `发朋友圈"又到滑雪季"配一张去年的照片`, "翘班去滑雪，今天的雪明天就没了"],
-    effects: [
-      { dim: "s1", scores: [2, 1, 3] },
-      { dim: "s5", scores: [1, 3, 1] },
-    ],
+    text: "你是怎么学会滑雪的？",
+    options: ["正经请教练系统学", "朋友带，教了点基础", "完全自学，靠摔会的"],
+    kind: "diagnostic",
+    effects: {
+      A: { bling: 4, kpi: 1, ootd: 1, pizza: 1, pro: 1, safety: 1 },
+      B: { couple: 3, npc: 2, pua: 3, rental: 2, taxi: 4 },
+      C: { "404": 1, cliff: 1, mri: 3, xjbh: 5, yolo: 3 },
+    },
   },
   {
     id: 19,
-    text: "你选雪场最看重？",
-    options: ["雪道难度和雪质", "交通方便、设施好", "餐厅好不好吃、酒店舒不舒服"],
-    effects: [
-      { dim: "s2", scores: [3, 2, 1] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "雪场看到一个穿西装打领带在滑雪，你？",
+    options: ["肯定是大神，不打扰", "上去问他刚开完会吗", "明天我也穿，反正显眼"],
+    kind: "absurd",
+    effects: {
+      A: { "404": 1, npc: 1, pua: 2, sit: 1, tbd: 1 },
+      B: { drama: 3, drunk: 2, kpi: 2, wifi: 2 },
+      C: { bling: 3, ootd: 3, xjbh: 3, yyds: 2 },
+    },
   },
   {
     id: 20,
-    text: "你第一次上高级道是因为？",
-    options: [
-      "循序渐进练到了那个水平",
-      `朋友在旁边说"X总，你没问题的"，然后我就上去了`,
-      "走错了",
-    ],
-    effects: [
-      { dim: "s1", scores: [1, 3, 2] },
-      { dim: "s2", scores: [3, 2, 1] },
-    ],
+    text: '雪场广播"哪位朋友丢了一只左脚雪靴"，你？',
+    options: ["事不关己，继续滑", "默默低头看自己脚", "冲过去说是我的（虽然不是）"],
+    kind: "absurd",
+    effects: {
+      A: { "404": 3, ice: 1, kpi: 2, powder: 2, pro: 2 },
+      B: { npc: 4, pizza: 2, pua: 4, rental: 3, tbd: 4, xjbh: 2 },
+      C: { drama: 4, drunk: 1, rip: 4, wifi: 2 },
+    },
   },
   {
     id: 21,
-    text: "如果你可以给雪场加一个设施，你选？",
-    options: ["更多高级道和野雪区域", "山顶温泉和观景台", "道内WiFi全覆盖和充电站"],
-    effects: [
-      { dim: "s2", scores: [3, 2, 1] },
-      { dim: "s5", scores: [1, 3, 2] },
-    ],
+    text: "缆车停在半空 5 分钟纹丝不动，你？",
+    options: ["跟对面缆车的人隔空喊话", '淡定拍 vlog 发"家人们这是山顶限定"', "默默写遗书"],
+    kind: "absurd",
+    effects: {
+      A: { couple: 2, drama: 4, drunk: 2, wifi: 2 },
+      B: { ootd: 3, rip: 5, wifi: 3 },
+      C: { mri: 2, npc: 2, pua: 5, sit: 1, tbd: 4 },
+    },
   },
   {
     id: 22,
-    text: "你在雪场排队等缆车，前面至少要等20分钟，你？",
-    options: ["等，这条道值得", "换一条不排队的道", "算了去喝咖啡，等人少了再来"],
-    effects: [
-      { dim: "s2", scores: [3, 2, 1] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "雪道正中间一位大爷在打太极，你？",
+    options: ["绕开，不打扰大爷修行", "停下来静静欣赏一会儿", "凑过去问能不能加入"],
+    kind: "absurd",
+    effects: {
+      A: { "404": 1, ice: 1, kpi: 2, pro: 1, safety: 1 },
+      B: { npc: 2, sit: 3, sofa: 1, tbd: 2 },
+      C: { drama: 4, drunk: 4, taxi: 2, xjbh: 2, yyds: 2 },
+    },
   },
   {
     id: 23,
-    text: "你在雪道中间停下来系鞋带，后面撞过来一个人，你？",
-    options: [
-      "赶紧道歉",
-      "说是他没看路",
-      "就地痛苦呻吟打算讹一笔",
-    ],
-    effects: [
-      { dim: "s1", scores: [1, 2, 3] },
-      { dim: "s5", scores: [1, 1, 3] },
-    ],
+    text: "下午三点，你在？",
+    options: ["还在刷道，刷到闭园再说", "休息室喝杯咖啡，准备最后两趟", "已经在山下吃火锅/泡温泉"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 1, ice: 1, kpi: 1, powder: 1, pro: 1, speed: 4 },
+      B: { bling: 2, couple: 3, npc: 1, safety: 3, stamp: 1, yyds: 2 },
+      C: { drunk: 2, ootd: 3, sit: 2, sofa: 4, tbd: 2 },
+    },
   },
   {
     id: 24,
-    text: "你跟一群朋友去滑雪，到了雪场你？",
-    options: ["自己先冲了，回头见", "一起滑几趟，然后各玩各的", "全程不分开，一起滑一起拍照一起吃饭"],
-    effects: [{ dim: "s3", scores: [1, 2, 3] }],
+    text: "你今年比去年技术上有什么进步？",
+    options: ["明显进步，能下更难的道", "原地踏步，还是那样", "今年没怎么滑，没法判断"],
+    kind: "diagnostic",
+    effects: {
+      A: { cliff: 2, early: 3, kpi: 1, park: 3, powder: 1, pro: 2, speed: 1, stamp: 2, tree: 1 },
+      B: { drunk: 2, npc: 4, pizza: 3, rental: 2, sit: 1 },
+      C: { ootd: 1, sit: 1, sofa: 4, taxi: 2, tbd: 2 },
+    },
   },
   {
     id: 25,
-    text: "你觉得滑雪最爽的瞬间是？",
-    options: ["完美刻滑一条长弯", "粉雪里飘起来的那一刻", "躺在雪地里看蓝天什么都不想"],
-    effects: [
-      { dim: "s1", scores: [1, 3, 2] },
-      { dim: "s2", scores: [1, 3, 1] },
-    ],
+    text: "看到一片小树林，你？",
+    options: ["肯定不去，太危险了", "看心情，可能溜一圈", "我的心头好，必去"],
+    kind: "absurd",
+    effects: {
+      A: { npc: 1, ootd: 3, pizza: 2, rental: 3, safety: 2, taxi: 2 },
+      B: { ice: 3, kpi: 1, park: 2, powder: 2, stamp: 2 },
+      C: { "404": 1, cliff: 2, powder: 2, tree: 4 },
+    },
   },
   {
     id: 26,
-    text: "你发现今天雪况很冰，你？",
-    options: ["调整技术，冰面也是训练", "减少难度，安全第一", "去餐厅坐着等它化"],
-    effects: [
-      { dim: "s1", scores: [3, 1, 1] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "雪场有个 park 区（跳台/rails），你？",
+    options: ["不进去，那是外星人玩的", "看看就好，偶尔玩玩小的", "我的整个雪季都为了这个"],
+    kind: "absurd",
+    effects: {
+      A: { ice: 1, npc: 1, pizza: 1, rental: 1, safety: 1, sofa: 1, tbd: 1 },
+      B: { bling: 1, drunk: 2, mri: 2, stamp: 3, wifi: 2 },
+      C: { cliff: 3, park: 5, xjbh: 2, yyds: 3 },
+    },
   },
   {
     id: 27,
-    text: "雪场看到一个穿汉服滑雪的姐姐，你？",
-    options: [
-      "文化输出，默默点个赞",
-      "掏手机拍照发小红书",
-      "明天我穿西游记 cos 来",
-    ],
-    effects: [
-      { dim: "s4", scores: [1, 2, 3] },
-      { dim: "s3", scores: [1, 2, 3] },
-    ],
+    text: "为什么愿意/不愿意特地飞日本/北海道？",
+    options: ["没去过，没必要", "想去打个卡，听说不错", "为了那里的粉雪，每年必去"],
+    kind: "absurd",
+    effects: {
+      A: { npc: 1, pizza: 2, rental: 2, sofa: 1, taxi: 2, xjbh: 2 },
+      B: { bling: 3, couple: 2, kpi: 2, ootd: 2, stamp: 3, wifi: 2 },
+      C: { "404": 2, cliff: 2, powder: 4, pro: 4, tree: 2 },
+    },
   },
   {
     id: 28,
-    text: "如果给你一天无限缆车不排队，你会？",
-    options: ["从早刷到晚，一趟不浪费", "上午刷道，下午试试没去过的区域", "上午滑两趟，然后找个好位置拍延时摄影"],
-    effects: [
-      { dim: "s5", scores: [1, 1, 3] },
-      { dim: "s2", scores: [2, 3, 1] },
-    ],
+    text: "朋友问你最近滑哪儿，你最想说的答案？",
+    options: ["崇礼/亚布力，挺好的", "其实最近没怎么滑", "上次在二世谷，雪比这边好太多了"],
+    kind: "absurd",
+    effects: {
+      A: { couple: 2, kpi: 3, npc: 1, safety: 1, stamp: 2 },
+      B: { pua: 2, rental: 3, sit: 1, sofa: 1, taxi: 3, tbd: 2 },
+      C: { "404": 3, bling: 3, ootd: 2, powder: 2, pro: 3, yyds: 2 },
+    },
   },
   {
     id: 29,
-    text: "你的护具情况是？",
-    options: ["头盔护甲护膝全套", "就一个头盔", "护具是什么，能吃吗"],
-    effects: [
-      { dim: "s1", scores: [1, 2, 3] },
-      { dim: "s6", scores: [3, 2, 1] },
-    ],
+    text: "雪场餐厅有热红酒/啤酒，你？",
+    options: ["下午要滑，不喝", "尝两口意思一下", "来一壶，下午滑得更飘"],
+    kind: "absurd",
+    effects: {
+      A: { early: 1, ice: 1, kpi: 1, pizza: 1, pro: 1, safety: 1 },
+      B: { couple: 2, ootd: 2, stamp: 1, tree: 2 },
+      C: { drama: 2, drunk: 4, sofa: 3, xjbh: 2, yolo: 2 },
+    },
   },
   {
     id: 30,
-    text: "缆车上你旁边的人在吃辣条，味道特别大，你？",
-    options: [
-      "默默往边上挪",
-      "闻着还挺香",
-      "问他有没有多的分我一根",
-    ],
-    effects: [
-      { dim: "s3", scores: [1, 2, 3] },
-      { dim: "s5", scores: [1, 2, 3] },
-    ],
+    text: "你滑雪受伤后的朋友圈大概是？",
+    options: ["不发，自己默默处理", "发一张冰敷照配文'还活着'", "九宫格 + 三百字小作文"],
+    kind: "absurd",
+    effects: {
+      A: { "404": 2, early: 2, ice: 1, npc: 1, pro: 3, sit: 1 },
+      B: { couple: 3, drama: 3, drunk: 1, mri: 4, yolo: 2 },
+      C: { drama: 2, ootd: 2, rip: 5, wifi: 3 },
+    },
+  },
+  {
+    id: 31,
+    text: "你的雪板/头盔上贴了几张贴纸/徽章？",
+    options: ["干干净净，原装", "几张，是几个有意义的雪场", "贴满了，每去一个新雪场加一张"],
+    kind: "diagnostic",
+    effects: {
+      A: { "404": 1, ice: 2, kpi: 1, pizza: 2, pua: 2, rental: 1, sit: 1, taxi: 1 },
+      B: { couple: 2, drunk: 2, mri: 2, park: 2, tree: 3 },
+      C: { park: 2, stamp: 4, yyds: 3 },
+    },
+  },
+  {
+    id: 32,
+    text: "雪场有测速牌，你的反应？",
+    options: ["不在意，速度不是重点", "瞄一眼自己时速", "今天目标 80 km/h，必须破纪录"],
+    kind: "absurd",
+    effects: {
+      A: { "404": 1, npc: 1, ootd: 2, pizza: 1, sit: 1, sofa: 1, taxi: 1, tbd: 1, tree: 2 },
+      B: { ice: 5, kpi: 3, pro: 1, stamp: 2, yyds: 2 },
+      C: { cliff: 2, mri: 2, speed: 4, xjbh: 2, yolo: 3 },
+    },
+  },
+  {
+    id: 33,
+    text: "你滑雪日里坐在雪地上发呆最长的一次是多久？",
+    options: ["没坐过，摔了立刻起来", "几分钟，缓一下", "至少半小时，被救援队问候过"],
+    kind: "absurd",
+    effects: {
+      A: { early: 2, ice: 1, kpi: 1, pro: 2, safety: 1, speed: 1 },
+      B: { drama: 2, mri: 3, npc: 2, pua: 3, rip: 3, sofa: 2, tbd: 2 },
+      C: { drunk: 1, sit: 5, sofa: 1 },
+    },
+  },
+  {
+    id: 34,
+    text: "看到一个 5 米高的雪檐悬崖，你？",
+    options: ["绕开，看都不看", "看一眼，留个念想", "起飞"],
+    kind: "absurd",
+    effects: {
+      A: { npc: 1, ootd: 1, pizza: 1, pua: 3, rental: 3, safety: 1, sit: 1, sofa: 1, taxi: 2, tbd: 1 },
+      B: { "404": 3, ice: 5, powder: 2, pro: 1, stamp: 1, tree: 3 },
+      C: { cliff: 4, mri: 3, park: 2, speed: 2, xjbh: 3, yolo: 3 },
+    },
+  },
+  {
+    id: 35,
+    text: "雪场有人 cos 滑雪——汉服或西游记打扮——你？",
+    options: ["默默欣赏", "拍照发小红书", "明天我也来一套"],
+    kind: "absurd",
+    effects: {
+      A: { "404": 1, ice: 1, npc: 2, pro: 1, safety: 2, sit: 1, tree: 1 },
+      B: { couple: 2, drama: 2, ootd: 4, rip: 4, stamp: 2, wifi: 2 },
+      C: { drama: 4, drunk: 1, park: 2, xjbh: 3, yolo: 2 },
+    },
+  },
+  {
+    id: 36,
+    text: "你滑雪戴运动手环/记 GPS 数据吗？",
+    options: ["戴，每天都看数据", "戴，但不怎么看", "不戴，没必要"],
+    kind: "diagnostic",
+    effects: {
+      A: { bling: 1, ice: 1, kpi: 1, pro: 1, speed: 3, stamp: 2 },
+      B: { bling: 2, couple: 2, drunk: 1, mri: 2, pua: 2, yyds: 2 },
+      C: { "404": 2, npc: 2, rental: 1, sit: 1, sofa: 1, taxi: 2, tbd: 1, xjbh: 2 },
+    },
   },
 ];

@@ -9,11 +9,11 @@ const allC = new Array(questions.length).fill(2);
 
 console.log("=== Extreme cases ===");
 console.log("All A scores:", computeScores(allA));
-console.log("All A match:", matchPersonality(computeScores(allA)).slug);
+console.log("All A match:", matchPersonality(allA).slug);
 console.log("All B scores:", computeScores(allB));
-console.log("All B match:", matchPersonality(computeScores(allB)).slug);
+console.log("All B match:", matchPersonality(allB).slug);
 console.log("All C scores:", computeScores(allC));
-console.log("All C match:", matchPersonality(computeScores(allC)).slug);
+console.log("All C match:", matchPersonality(allC).slug);
 
 // Monte Carlo
 const counts: Record<string, number> = {};
@@ -23,7 +23,7 @@ for (let i = 0; i < N; i++) {
   const answers = Array.from({ length: questions.length }, () =>
     Math.floor(Math.random() * 3)
   );
-  const p = matchPersonality(computeScores(answers));
+  const p = matchPersonality(answers);
   counts[p.slug]++;
 }
 

@@ -25,8 +25,7 @@ describe("computeScores", () => {
 describe("matchPersonality", () => {
   it("returns a valid personality slug", () => {
     const answers = new Array(questions.length).fill(1);
-    const scores = computeScores(answers);
-    const personality = matchPersonality(scores);
+    const personality = matchPersonality(answers);
     expect(personalities.some((p) => p.slug === personality.slug)).toBe(true);
   });
 });
