@@ -28,7 +28,7 @@ export const questions: Question[] = [
     kind: "diagnostic",
     effects: {
       // 早起：早起党签名（独占）
-      A: { early: 8, powder: 2 },
+      A: { early: 10, powder: 2 },
       // 优雅迟到：时尚/社交型，悠闲节奏
       B: { bling: 3, couple: 3, drunk: 2, ootd: 4, stamp: 2 },
       // 下午才到：摸鱼型 + 宿醉 + 决策慢
@@ -41,8 +41,8 @@ export const questions: Question[] = [
     effects: {
       // 数不过来：刷道狂
       A: { cliff: 3, early: 4, speed: 4 },
-      // 10-15 趟：技术专精 + 节奏控制
-      B: { couple: 3, mri: 3, park: 5, powder: 3, stamp: 3, tree: 5, yyds: 5 },
+      // 10-15 趟：技术专精 + 节奏控制 + KPI 数清楚
+      B: { couple: 3, kpi: 3, mri: 3, park: 5, powder: 3, stamp: 3, tree: 5, yyds: 5 },
       // 三五趟：摸鱼/技术不行/决策慢
       C: { drunk: 2, npc: 2, ootd: 3, pizza: 5, rental: 3, sit: 5, sofa: 4 } } },
   {
@@ -51,8 +51,8 @@ export const questions: Question[] = [
     options: ["雪场快餐 10 分钟搞定", "山下找了一家正经火锅店，吃两小时", "随便对付，主要是要喝两杯"],
     kind: "diagnostic",
     effects: {
-      // 快餐 10 分钟：效率至上的刷道狂
-      A: { "404": 2, early: 3, powder: 2, speed: 4 },
+      // 快餐 10 分钟：效率至上的刷道狂 + KPI 时间管理
+      A: { "404": 2, early: 3, kpi: 3, powder: 2, speed: 4 },
       // 火锅 2 小时：来吃饭的（SOFA 签名）+ 约会型
       B: { couple: 3, sit: 1, sofa: 5 },
       // 喝酒：DRUNK 签名
@@ -63,8 +63,8 @@ export const questions: Question[] = [
     options: ["立刻爬起来分析动作哪儿不对", "在雪地上躺一会儿喘口气", "掏手机看刚才那段拍下来没"],
     kind: "diagnostic",
     effects: {
-      // 立刻分析：技术控
-      A: { early: 2, kpi: 8, safety: 2 },
+      // 立刻分析：技术控 + PRO 本能
+      A: { early: 2, kpi: 8, pro: 5, safety: 2 },
       // 躺一会儿：佛系/受伤/被吓到
       B: { mri: 3, npc: 2, sit: 5, sofa: 1 },
       // 拍下来：内容创作者
@@ -76,7 +76,7 @@ export const questions: Question[] = [
     kind: "diagnostic",
     effects: {
       // 黑灰低调：严肃专精派
-      A: { "404": 3, early: 4, powder: 3, sit: 2, tree: 2 },
+      A: { "404": 3, early: 4, powder: 3, pro: 2, sit: 2, tree: 2 },
       // 中性搭配：常规中庸
       B: { couple: 3, npc: 3, rental: 4, safety: 2, sofa: 2, stamp: 2 },
       // 色彩拼接：花花绿绿型
@@ -123,8 +123,8 @@ export const questions: Question[] = [
     options: ["复盘刚才那条线，想动作要领", "刷手机或者跟旁边人聊天", "看四周风景，啥都不想"],
     kind: "diagnostic",
     effects: {
-      // 复盘动作：技术控
-      A: { early: 3, kpi: 6, safety: 2, speed: 3 },
+      // 复盘动作：技术控 + PRO
+      A: { early: 3, kpi: 6, pro: 5, safety: 2, speed: 3 },
       // 刷手机/聊天：内容/社交型
       B: { bling: 2, couple: 3, drama: 3, drunk: 2, ootd: 3, rip: 5, stamp: 2, wifi: 5 },
       // 看风景啥都不想：佛系/独狼
@@ -183,8 +183,8 @@ export const questions: Question[] = [
     options: ["备用手套和暖宝宝", "零食和充电宝", "自拍杆和补妆镜"],
     kind: "diagnostic",
     effects: {
-      // 实用谨慎
-      A: { "404": 2, mri: 3, npc: 2, pizza: 3, powder: 2, rental: 2, safety: 4, tree: 2 },
+      // 实用谨慎 + PRO 准备充分 + KPI 应急预案
+      A: { "404": 2, kpi: 2, mri: 3, npc: 2, pizza: 3, powder: 2, pro: 2, rental: 2, safety: 4, tree: 2 },
       // 摸鱼吃货
       B: { couple: 3, drama: 3, drunk: 3, sit: 3, sofa: 4, stamp: 2 },
       // 内容/穿搭
@@ -196,7 +196,7 @@ export const questions: Question[] = [
     kind: "absurd",
     effects: {
       // 双板：默认/技术派
-      A: { "404": 2, couple: 2, npc: 2, pizza: 4, rental: 2, safety: 2, speed: 5, tree: 2 },
+      A: { "404": 2, couple: 2, npc: 2, pizza: 4, pro: 3, rental: 2, safety: 2, speed: 5, tree: 2 },
       // 单板：单板党签名
       B: { bling: 2, cliff: 4, drama: 2, drunk: 2, park: 5, powder: 2, xjbh: 5, yolo: 5, yyds: 5 },
       // 无所谓：随意型
@@ -221,8 +221,8 @@ export const questions: Question[] = [
     effects: {
       // 凭感觉：莽 + 自信
       A: { "404": 2, cliff: 3, drunk: 2, mri: 2, speed: 4, xjbh: 5, yolo: 5 },
-      // 查地图：选道困难症签名
-      B: { couple: 2, powder: 2, safety: 3, stamp: 3, tree: 4 },
+      // 查地图：选道困难症签名 + KPI 数据决策
+      B: { couple: 2, kpi: 4, powder: 2, safety: 3, stamp: 3, tree: 4 },
       // 等别人先下：跟随型
       C: { npc: 2, pizza: 3, rental: 2, sit: 1 } } },
   {
@@ -231,8 +231,8 @@ export const questions: Question[] = [
     options: ["正经请教练系统学", "朋友带，教了点基础", "完全自学，靠摔会的"],
     kind: "diagnostic",
     effects: {
-      // 请教练：正规
-      A: { bling: 5, couple: 2, mri: 2, ootd: 2, pizza: 4, safety: 3 },
+      // 请教练：正规 + PRO 系统训练路径
+      A: { bling: 5, couple: 2, mri: 2, ootd: 2, pizza: 4, pro: 4, safety: 3 },
       // 朋友带
       B: { couple: 3, drunk: 1, npc: 2, rental: 3, stamp: 2 },
       // 自学摔会：瞎几把滑签名
@@ -291,12 +291,12 @@ export const questions: Question[] = [
     options: ["还在刷道，刷到闭园再说", "休息室喝杯咖啡，准备最后两趟", "已经在山下吃火锅/泡温泉"],
     kind: "diagnostic",
     effects: {
-      // 还在刷道：专注派
-      A: { "404": 2, cliff: 2, park: 2, powder: 3, speed: 2 },
-      // 喝咖啡再两趟：节奏控
-      B: { bling: 3, couple: 3, mri: 2, npc: 2, safety: 3, stamp: 3, tree: 2, yyds: 5 },
+      // 还在刷道：专注派 + PRO 耐力
+      A: { "404": 2, cliff: 2, park: 2, powder: 3, pro: 3, speed: 2 },
+      // 喝咖啡再两趟：节奏控 + KPI 计划性休息
+      B: { bling: 3, couple: 3, kpi: 3, mri: 2, npc: 2, safety: 3, stamp: 3, tree: 2, yyds: 5 },
       // 山下温泉火锅：摸鱼派 + 早起的人累了已经走了
-      C: { drunk: 4, early: 4, ootd: 3, rental: 2, sit: 4, sofa: 5 } } },
+      C: { drunk: 4, early: 6, ootd: 3, rental: 2, sit: 4, sofa: 5 } } },
   {
     id: 24,
     text: "你今年比去年技术上有什么进步？",
@@ -387,8 +387,8 @@ export const questions: Question[] = [
     options: ["干干净净，原装", "几张，是几个有意义的雪场", "贴满了，每去一个新雪场加一张"],
     kind: "diagnostic",
     effects: {
-      // 干干净净：极简主义
-      A: { "404": 3, npc: 2, pizza: 2, rental: 5, safety: 4, sit: 1, sofa: 1 },
+      // 干干净净：极简主义 + PRO 不需要装饰 + KPI 不浪费
+      A: { "404": 3, kpi: 2, npc: 2, pizza: 2, pro: 2, rental: 5, safety: 4, sit: 1, sofa: 1 },
       // 几张：常规
       B: { bling: 2, couple: 3, drunk: 2, mri: 3, park: 3, powder: 2, tree: 2, yyds: 2 },
       // 贴满：打卡党签名
@@ -401,8 +401,8 @@ export const questions: Question[] = [
     effects: {
       // 不在意：非速度向
       A: { "404": 2, couple: 2, npc: 2, ootd: 3, pizza: 4, powder: 2, rental: 3, safety: 2, sit: 1, sofa: 2, tree: 3 },
-      // 瞄一眼：好奇
-      B: { bling: 3, stamp: 3, yyds: 4 },
+      // 瞄一眼：好奇 + KPI 看数据
+      B: { bling: 3, kpi: 3, stamp: 3, yyds: 4 },
       // 80 km/h：速度狂签名
       C: { cliff: 3, mri: 2, speed: 5, xjbh: 4, yolo: 5 } } },
   {
@@ -411,8 +411,8 @@ export const questions: Question[] = [
     options: ["没坐过，摔了立刻起来", "几分钟，缓一下", "至少半小时，被救援队问候过"],
     kind: "absurd",
     effects: {
-      // 立刻起来：高效
-      A: { early: 3, pizza: 2, safety: 2, speed: 2 },
+      // 立刻起来：高效 + KPI 不浪费时间
+      A: { early: 3, kpi: 4, pizza: 2, safety: 2, speed: 2 },
       // 几分钟：常规
       B: { drama: 3, drunk: 1, mri: 2, npc: 2, rip: 5, sofa: 2 },
       // 至少半小时：坐山雕签名

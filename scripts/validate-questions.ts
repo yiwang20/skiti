@@ -118,6 +118,52 @@ if (failures.length === 0) {
   for (const f of failures) console.log("  -", f);
 }
 
+// === Structural ceiling (max possible points each personality can earn) ===
+// liveQ   = # questions where slug appears in at least one option (slug can score)
+// maxCeil = sum of max(A,B,C) for slug across all questions (greedy ceiling)
+// refs    = total (question,option) pairs where slug > 0 (footprint size)
+// totalPts= sum of all slug points across the whole question bank
+console.log("\n=== Structural ceiling (sorted asc by maxCeil) ===");
+const ceilings = personalities.map((p) => {
+  let liveQ = 0;
+  let maxC = 0;
+  let refs = 0;
+  let totalPts = 0;
+  for (const q of questions) {
+    let qHasSlug = false;
+    let qMax = 0;
+    for (const opt of OPTIONS) {
+      const v = q.effects[opt][p.slug] ?? 0;
+      if (v > 0) {
+        qHasSlug = true;
+        refs++;
+        totalPts += v;
+        if (v > qMax) qMax = v;
+      }
+    }
+    if (qHasSlug) liveQ++;
+    maxC += qMax;
+  }
+  return { slug: p.slug, liveQ, maxC, refs, totalPts };
+});
+ceilings.sort((a, b) => a.maxC - b.maxC);
+console.log(
+  "slug".padEnd(10),
+  "liveQ".padStart(6),
+  "maxCeil".padStart(8),
+  "refs".padStart(6),
+  "totalPts".padStart(9)
+);
+for (const c of ceilings) {
+  console.log(
+    c.slug.padEnd(10),
+    String(c.liveQ).padStart(6),
+    String(c.maxC).padStart(8),
+    String(c.refs).padStart(6),
+    String(c.totalPts).padStart(9)
+  );
+}
+
 // === Monte Carlo distribution ===
 console.log("\n=== Monte Carlo (100k random answers) ===");
 const counts: Record<string, number> = {};
