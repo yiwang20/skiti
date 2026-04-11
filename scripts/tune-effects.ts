@@ -103,18 +103,11 @@ function fixSelfMatchFailures(): boolean {
   if (failures.length === 0) return false;
   failures.sort((a, b) => (a.winnerScore - a.ownScore) - (b.winnerScore - b.ownScore));
   for (const f of failures) {
-    // Reduce winner on options the failing slug prefers
-    for (let qi = 0; qi < eff.length; qi++) {
-      const opt = OPTIONS[f.ideal[qi]];
-      const wp = eff[qi][opt][f.winner] ?? 0;
-      if (wp >= 2) {
-        eff[qi][opt][f.winner] = wp - 1;
-        if (eff[qi][opt][f.winner] === 0) delete eff[qi][opt][f.winner];
-      }
-    }
-    // Boost slug on its preferred options where it currently has < 5 points
+    // ADD-ONLY strategy: boost slug on its preferred options where it has > 0 points
     let boosts = 0;
-    for (let qi = 0; qi < eff.length && boosts < 4; qi++) {
+    const deficit = f.winnerScore - f.ownScore;
+    const maxBoosts = Math.max(4, deficit + 2);
+    for (let qi = 0; qi < eff.length && boosts < maxBoosts; qi++) {
       const opt = OPTIONS[f.ideal[qi]];
       const cur = eff[qi][opt][f.slug] ?? 0;
       if (cur >= 1 && cur < 5) {
@@ -142,17 +135,18 @@ function balanceDistribution(targetMin: number, targetMax: number): boolean {
   over.sort((a, b) => b[1] - a[1]);
   under.sort((a, b) => a[1] - b[1]);
 
-  // Nerf over-represented: pick 5 random options where they have ≥2 points and reduce by 1
+  // Reduce over-represented but ONLY non-signature entries (≤3 points).
+  // Signature entries (4-5) are semantically meaningful and protected.
   for (const [slug] of over.slice(0, 5)) {
     const candidates: Array<[number, "A" | "B" | "C"]> = [];
     for (let qi = 0; qi < eff.length; qi++) {
       for (const opt of OPTIONS) {
         const v = eff[qi][opt][slug] ?? 0;
-        if (v >= 2) candidates.push([qi, opt]);
+        if (v >= 2 && v <= 3) candidates.push([qi, opt]);
       }
     }
     candidates.sort(() => Math.random() - 0.5);
-    for (const [qi, opt] of candidates.slice(0, 5)) {
+    for (const [qi, opt] of candidates.slice(0, 4)) {
       const v = eff[qi][opt][slug];
       eff[qi][opt][slug] = v - 1;
       if (eff[qi][opt][slug] === 0) delete eff[qi][opt][slug];
