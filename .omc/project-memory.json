@@ -1,0 +1,288 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775881369225,
+  "projectRoot": "/Users/peter/dev/ski-mbti",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "14.2.35",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "18",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "18",
+        "category": "frontend"
+      },
+      {
+        "name": "jest",
+        "version": "30.3.0",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "components",
+      "docs",
+      "lib",
+      "public",
+      "scripts"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 4,
+      "lastAccessed": 1775881369164,
+      "keyFiles": [
+        "favicon.ico",
+        "globals.css",
+        "layout.tsx",
+        "page.tsx"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 7,
+      "lastAccessed": 1775881369165,
+      "keyFiles": [
+        "DimensionChart.tsx",
+        "Footer.tsx",
+        "Navbar.tsx",
+        "PersonalityCard.tsx",
+        "ProgressBar.tsx"
+      ]
+    },
+    "data": {
+      "path": "data",
+      "purpose": "Data files",
+      "fileCount": 3,
+      "lastAccessed": 1775881369178,
+      "keyFiles": [
+        "dimensions.ts",
+        "personalities.ts",
+        "questions.ts"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 2,
+      "lastAccessed": 1775881369179,
+      "keyFiles": [
+        "content-review.md",
+        "personality-image-prompts.md"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 3,
+      "lastAccessed": 1775881369179,
+      "keyFiles": [
+        "encoding.ts",
+        "scoring.ts",
+        "visual-scale.ts"
+      ]
+    },
+    "out": {
+      "path": "out",
+      "purpose": "Build output",
+      "fileCount": 10,
+      "lastAccessed": 1775881369180,
+      "keyFiles": [
+        "404.html",
+        "about.html",
+        "about.txt",
+        "favicon.ico",
+        "index.html"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 0,
+      "lastAccessed": 1775881369180,
+      "keyFiles": []
+    },
+    "qa-screenshots": {
+      "path": "qa-screenshots",
+      "purpose": null,
+      "fileCount": 15,
+      "lastAccessed": 1775881369180,
+      "keyFiles": [
+        "01-home-full.png",
+        "01-home.png",
+        "02-types-full.png",
+        "02-types.png",
+        "03-type-sofa.png"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 4,
+      "lastAccessed": 1775881369181,
+      "keyFiles": [
+        "analytics.sh",
+        "analyze.ts",
+        "calibrate.ts",
+        "remove-checker.js"
+      ]
+    },
+    "app/test": {
+      "path": "app/test",
+      "purpose": "Test files",
+      "fileCount": 1,
+      "lastAccessed": 1775881369181,
+      "keyFiles": [
+        "page.tsx"
+      ]
+    },
+    "app/types": {
+      "path": "app/types",
+      "purpose": "Type definitions",
+      "fileCount": 1,
+      "lastAccessed": 1775881369182,
+      "keyFiles": [
+        "page.tsx"
+      ]
+    },
+    "lib/__tests__": {
+      "path": "lib/__tests__",
+      "purpose": "Test files",
+      "fileCount": 2,
+      "lastAccessed": 1775881369183,
+      "keyFiles": [
+        "encoding.test.ts",
+        "scoring.test.ts"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "data/personalities.ts",
+      "accessCount": 20,
+      "lastAccessed": 1775893511519,
+      "type": "file"
+    },
+    {
+      "path": "data/questions.ts",
+      "accessCount": 11,
+      "lastAccessed": 1775894860209,
+      "type": "file"
+    },
+    {
+      "path": "scripts/tune-effects.ts",
+      "accessCount": 7,
+      "lastAccessed": 1775889864575,
+      "type": "file"
+    },
+    {
+      "path": "docs/personality-image-prompts.md",
+      "accessCount": 7,
+      "lastAccessed": 1775893557946,
+      "type": "file"
+    },
+    {
+      "path": "scripts/analyze.ts",
+      "accessCount": 3,
+      "lastAccessed": 1775886937124,
+      "type": "file"
+    },
+    {
+      "path": "lib/scoring.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775886222330,
+      "type": "file"
+    },
+    {
+      "path": "app/test/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1775886896123,
+      "type": "file"
+    },
+    {
+      "path": "lib/__tests__/scoring.test.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775886902702,
+      "type": "file"
+    },
+    {
+      "path": "lib/encoding.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775885634355,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 1,
+      "lastAccessed": 1775885674993,
+      "type": "directory"
+    },
+    {
+      "path": "scripts/validate-questions.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775886251492,
+      "type": "file"
+    },
+    {
+      "path": "scripts/calibrate.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775886908222,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
